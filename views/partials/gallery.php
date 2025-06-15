@@ -16,8 +16,8 @@
                         $escapedPath = htmlspecialchars($filePath);
                         echo '
                             <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                                <a href="/public/img/gallery/' . $file . '" class="fancybox" rel="ligthbox">
-                                    <img src="/public/img/gallery/' . $file . '" class="zoom img-fluid" alt="' . $file . '">
+                                <a href="/cmc-organik-website/public/img/gallery/' . $file . '" class="fancybox" rel="ligthbox">
+                                    <img src="/cmc-organik-website/public/img/gallery/' . $file . '" class="zoom img-fluid" alt="' . $file . '">
                                 </a>
                             </div>
                         ';

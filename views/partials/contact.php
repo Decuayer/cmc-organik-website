@@ -37,7 +37,7 @@
                 </form>
             </div>
             <div class="col-md-5">
-                <div class="bg-light p-4 rounded shadow-sm h-100">
+                <div class="bg-body p-4 rounded shadow-sm h-100">
                     <h4 class="mb-4 text-success">İletişim Bilgileri</h4>
                     
                     <div class="mb-3">
@@ -50,13 +50,13 @@
                     <div class="mb-3">
                         <i class="bi bi-telephone-fill me-2 text-success"></i>
                         <strong>Telefon:</strong><br>
-                        <a href="tel:+902324780078" class="text-decoration-none text-dark">+90 (232) 478 00 78</a>
+                        <a href="tel:+902324780078" class="text-decoration-none link-body-emphasis">+90 (232) 478 00 78</a>
                     </div>
                     
                     <div class="mb-3">
                         <i class="bi bi-envelope-fill me-2 text-success"></i>
                         <strong>E-posta:</strong><br>
-                        <a href="mailto:cmcorganik@hotmail.com" class="text-decoration-none text-dark">cmcorganik@hotmail.com</a>
+                        <a href="mailto:cmcorganik@hotmail.com" class="text-decoration-none link-body-emphasis">cmcorganik@hotmail.com</a>
                     </div>
                     
                     <div>

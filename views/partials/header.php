@@ -80,11 +80,11 @@ $productTypes = $typesQuery->fetchAll(PDO::FETCH_ASSOC);
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle <?= in_array($currentPage, ['editing.php', 'gallery.php']) ? 'active' : '' ?>" href="editing.php" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle <?= in_array($currentPage, ['registration.php', 'gallery.php']) ? 'active' : '' ?>" href="editing.php" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Belgeler
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="editing.php">Tesciller</a></li>
+                            <li><a class="dropdown-item" href="registration.php">Tesciller</a></li>
                             <li><a class="dropdown-item" href="gallery.php">Galeri</a></li>
                         </ul>
                     </li>

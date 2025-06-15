@@ -34,6 +34,7 @@
             <?php include 'views/partials/carousel.php'; ?>
             <?php include 'views/partials/mproduct.php'; ?>
             <?php include 'views/partials/features.php'; ?>
+            <?php include 'views/partials/socialmedia.php'; ?>
             <?php include 'views/partials/mcontact.php'; ?>
             <?php include 'views/partials/footer.php'; ?>
         </main>
