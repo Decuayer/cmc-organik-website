@@ -112,3 +112,7 @@
         height: 60px; /* sadece navbar */
     }
 }
+
+.live-search-item:hover {
+    background-color: #f8f9fa;
+}

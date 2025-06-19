@@ -1,0 +1,227 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Anamakine: localhost
+-- Üretim Zamanı: 18 Haz 2025, 20:08:46
+-- Sunucu sürümü: 10.4.28-MariaDB
+-- PHP Sürümü: 8.2.4
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Veritabanı: `cmc`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `best_products`
+--
+
+CREATE TABLE `best_products` (
+  `id` int(11) NOT NULL,
+  `productid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Tablo döküm verisi `best_products`
+--
+
+INSERT INTO `best_products` (`id`, `productid`) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` int(11) NOT NULL,
+  `productid` int(11) NOT NULL,
+  `approved` tinyint(4) NOT NULL,
+  `name` varchar(200) DEFAULT NULL,
+  `email` varchar(200) DEFAULT NULL,
+  `phone` varchar(45) DEFAULT NULL,
+  `comment` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Tablo döküm verisi `comments`
+--
+
+INSERT INTO `comments` (`id`, `productid`, `approved`, `name`, `email`, `phone`, `comment`) VALUES
+(1, 1, 1, 'Ahmet Yılmaz', 'ahmet@example.com', '05331234567', 'Bu ürünü uzun süredir kullanıyorum, sonuçlar harika.'),
+(2, 1, 1, 'Elif Kara', 'elif@example.com', '05441234567', 'Çok kaliteli bir ürün, tavsiye ederim.'),
+(3, 1, 1, 'Mehmet Demir', 'mehmet@example.com', '05551234567', 'Kargolama hızlıydı, ürün açıklamadaki gibiydi.'),
+(4, 1, 1, 'Ahmet Yılmaz', 'ahmet@example.com', '05331234567', 'Bu ürünü uzun süredir kullanıyorum, sonuçlar harika.'),
+(5, 1, 1, 'Elif Kara', 'elif@example.com', '05441234567', 'Çok kaliteli bir ürün, tavsiye ederim.'),
+(6, 1, 1, 'Mehmet Demir', 'mehmet@example.com', '05551234567', 'Kargolama hızlıydı, ürün açıklamadaki gibiydi.');
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `products`
+--
+
+CREATE TABLE `products` (
+  `idproducts` int(11) NOT NULL,
+  `name` varchar(200) DEFAULT NULL,
+  `type` varchar(45) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `contents` text DEFAULT NULL,
+  `pack` varchar(200) DEFAULT NULL,
+  `applyType` varchar(200) DEFAULT NULL,
+  `apply` text DEFAULT NULL,
+  `imgPath` varchar(200) DEFAULT NULL,
+  `applySeperate` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Tablo döküm verisi `products`
+--
+
+INSERT INTO `products` (`idproducts`, `name`, `type`, `description`, `contents`, `pack`, `applyType`, `apply`, `imgPath`, `applySeperate`) VALUES
+(1, 'NAUTA', 'Biostimulantlar', 'Kuzey denizlerinden doğal yolla elde edilen Ascophyllum Nodosum cinsi deniz yosunudur. Bu sebepten soğuk \nşartlarda ürün kalitesinin ve hormon aktivitesinin devam etmesini teşvik eder. Çiçeklenmeyi arttırır. İçeriğindeki \n%50 aminoasitle enzimatik ve hormonal aktivitenin artmasını sağlar. Yaprak yapısını iyileştirerek ve aktif mineral \nalımını sağlayan doğal bir biostimülantdır. Ürün kalitesini artırarak, bitkilerin bakteri, mantar ve diğer hastalıklara \nkarşı korur. Bitki tarafından çok iyi absorbe edilir. Arazi yapısını iyileştirir, karbonhidrat ve proteinlerin yapımında \ngörev alır. Azotun emilimini arttırır. Mikro elementlerin taşınımı ve kullanımına yardımcıdır.', 'Organik madde %40, alginik asit %0.9, suda çözünür (K2O) %2.5, pH 7-9, max EC 67 dS/m', '0,25kg-0,5kg-1kg', 'Yapraktan, Damla sulama ile', '100lt suya 30-50gr, 1 da 30-50gr', 'data/product/b-nauta.png', 0),
+(2, 'ALGA MARİNE 100', 'Biostimulantlar', 'Enzimatik üretim teknolojisi sayesinde mümkün olan en yüksek biostimulant içeriğe sahiptir. İçeriğindeki dengeli\n ve yüksek miktardaki biostimulantlar,  enzim, protein ve organik asitler sayesinde, en zor stres koşullarında dahi\n bitkilerin hızla çalışabilmesini, hücre bölünmesini ve hücre büyümesini teşvik eder. Böylelikle kullanım dönemine\n bağlı olarak çiçeklenmeyi, meyve oluşumunu, meyve büyümesini ve bitki gelişimini teşvik eder. \n ', 'Organik madde %35, suda çözünür potasyum (K2O) %17, alginik asit %3, max. EC 60dS/m, Ph 6.5-8.5', '500gr', 'Uygulama', '100 lt suya 40-50gr', 'data/product/b-alga-marine-100.png', 0),
+(3, 'GROW UP 3-6-7', 'Biostimulantlar', 'Stres koşullarına karşı bitkilerde direnç ve dayanıklılığı arttırır.Filizlenmeyi teşvik eder,içerdiği azot (%3) ,fosfor \n(%6) ,potasyum (%7) ve Fe (%0,2), Mn (%0,5), Zn (%0,3) ile yaprak ayasını genişletip, sayısını arttırarak fotosentezi \nhızlandırır. Bitkide yağ, protein, ve şeker üretimini arttırır.Hücre bölünmesini destekler, bitki bünyesindeki absisik \nasit miktarını dengeler. Generatif gelişme ve vegatatif gelişme arasındaki dengeyi korur. Meyve tutumundan \nsonra kullanıldığında meyvede iriliği arttırır.\n', 'Toplam azot %3, üre azotu %3, sudaçözünür (K2O) %7, (P2O5) %6, biüresi düşük', '1Lt-5Lt-20Lt', 'Yapraktan', '100lt suya 100-125cc', 'data/product/b-growup-3-6-7.png', 0),
+(4, 'MAX PLANT 5 5 5', 'Biostimulantlar', ' Yüksek verim odaklı bir üründür. İçeriğindeki sitokinler meyve büyüklüğü ve kalite artışında etkilidir. İçeriğindeki\n anaftalitik asit sayesinde vegetatif büyüme ve kök sisteminin güçlü gelişmesini sağlar. Hücre bölünmesini teşvik eder,\n uzama ve farklılaşmada oldukça etkilidir. Ağırlık boyut artışında etkilidir.\n', 'Toplam azot %5, nitrat azot %1, üre azotu %4, suda çözünür (K2O) %5, (P2O5) %5', '0,25Lt-0,5Lt-1Lt', 'Yapraktan', '100lt suya 75-125 cc', 'data/product/b-maxplant-5-5-5.png', 0),
+(5, 'ENN GROW', 'Biostimulantlar', 'Bor (B), demir (Fe), mangan (Mn) gibi mikro bitki besin maddelerinden oluşur. Stres koşullarına karşı bitkilerde \ndirenç sağlar. Bitkilerde kuru madde miktarını arttırır. Meyve olgunlaşma döneminde aromatik özelliklerin ve \nrengin artmasını sağlar. Bitkide yağ, protein ve şeker üretimini arttırır. Meyve tutumundan sonra kullanıldığında \nmeyve iriliği ve homojenitesi artar. Bitkinin normal yaşam olaylarını uyarır, bitkinin kritik dönemleri \nkolaylıkla atlatmasına yardımcı olur. Kalite ve verimi arttırır. Hem yapraktan hem de topraktan uygulanabilir.\n Topaktan uygulandığı zaman canlı ve güçlü bir saçak köklenme sağlanır. Potasyum ve kalsiyum alınımını %100 \narttırır.\n', 'Bor (B) %0.5, demir (Fe) %2.6 , Mangan (Mn) %2.2 ', '1Kg', 'Yapraktan, Damla sulama ile', '100lt suya 75-125gr, 1 da 100-125gr', 'data/product/b-enn-grow.png', 0),
+(6, 'LOGİN 10', 'Biostimulantlar', 'Yüksek miktarda bitkisel menşeili serbest aminoasit içerir. Stres koşullarına karşın bitkilerde direnç ve\n dayanıklılığı arttırır. Büyüme uçlarını uyarır. İçerdiği yüksek miktardaki azot ile büyümeyi teşvik eder, hızlandırır.\n Fotosentez ve azot bağlanmasını hızlandırır. Klorofil üretimini hızlandırır ve oksijen taşınmasında görev alır.\n Güçlü sağlıklı çiçeklenme sağlar. Kuru madde miktarını arttırır. Olgunlaşma döneminde aroma artışında ve\n meyve büyüklüğünde oldukça etkili bir üründür. Kalite ve verimlilik artışında önemli rol oynar. Hem toprak\n hem yapraktan kullanılabilir.\n', 'Organik azot (N) %1.5, serbest amino asit %10, organik madde %20, organik karbon %14, Ph 3-5', '1Kg', 'Yapraktan, Damla sulama ile', '100lt suya 125-250cc,  1 da 500-1000cc ', 'data/product/b-login-10.png', 0),
+(7, 'GOO MAX 6-24-9+ME', 'Biostimulantlar', 'Homojen ve canlı çiçeklenme sağlar. Meyve tutumunu arttırır. Meyvenin irilik ve kalitesinde artış sağlar.\n Stres durgunluğu yaşayan bitkilerde ani hareketlenmeve gelişim sağlar. Kök gelişimi ve vegetatif\n gelişmenin kalitesini arttırır.\n', 'Toplam azot (N) %6 , nitrat azot %3, amonyum azotu %3, toplamfosfor pentaoksit (P2O5) %24, toplam potasyum oksit (K2O) %9, bor (b) %3, Molibden(Mo) %2.5', '', 'Yapraktan, Damla sulama ile', '100lt suya 75-125gr , 1 da 125gr', 'data/product/b-goo-max-6-24-9+me.png', 0),
+(8, 'RAMORG 6', 'Biostimulantlar', ' Amino asit içeren bitki aktivatörüdür, biyolojik aktiviteyi hızlandırır. Düzenli kullanıldığında (don, kırağı, kuraklık, \naşırı nem, rüzgar vs) stressi azaltır, direnci arttırır. Hızlı emilir. Virus, fungus ve nematod sebepli stressten kurtarır. \nPotasyum ve kalsiyumile birlikte kullanıldığında alınımda %100 artış gözlenir. Kuru madde miktarını arttırır. \nMeyve büyüklüğünde ve kök gelişiminde etkilidir. Fotosentez aktivitesini ve klorofiliçeriğini arttırır. Mineral alımını \ndüzenler. Su stresini azaltır.\n', 'Organik madde %20, organik karbon %13, organik azot %1.4, serbest amino asitler 6,Ph 3-5', '', 'Yapraktan, Damla sulama ile', '100lt suya 75-125cc , 1 da 250-500cc', 'data/product/b-ramorg-6.png', 0),
+(9, 'ISAPTION PLUS', 'Organik Ürünler', 'Yüksek miktarda bitkisel menşeili serbest aminoasit içerir. Stres koşullarına karşın bitkilerde direnç ve \ndayanıklılığı arttırır. Büyüme uçlarını uyarır. İçerdiği yüksek miktardaki azot (%6,8) ile büyümeyi teşvik eder, \nhızlandırır. Fotosentez ve azot bağlanmasını hızlandırır. Klorofil üretimine teşvik eder. Yaprağın rengini \nkoyulaştırır. Güçlü sağlıklı çiçeklenme sağlar. Kuru madde miktarını arttırır. Olgunlaşma döneminde aroma \nartışında ve meyve büyütülmesinde oldukça etkili bir üründür. Kalite ve verimlilik artışında önemli rol oynar.\n Hem toprak hem de yapraktan kullanılabilir.\n', 'Organik madde %50, organik karbon (C) %17, organik azot (N) %4.8, serbest amino asit %24, Ph 4-6 ', '1Lt-5Lt-20Lt', 'Yapraktan, Damla sulama ile', '100lt suya 125-250cc , 1 da 500-1000cc', 'data/product/ou-isaption-plus.png', 0),
+(10, 'SUCCESS', 'Organik Ürünler', ' Bitkisel menşeli sıvı organik gübredir. Emilimi hızlı ve kolaydır. Toprak düzenleyicidir. \nTopraktan kullanıldığında tuzluluk ve kireçlenmede azalma, toprak verimliliğinde ve \nmikroorganizma faaliyetinde artış görülmektedir. Kök sisteminin gelişmesini ve \nsaçak köklerin çoğalmasını sağlar. Ph’ı dengeler, besin elementlerini kompleksler ve \nbitkinin alabileceği formlara dönüştürür. Yüksek tamponlama kapasitesi sayesinde \nasidik karakterli toprakları nötralize eder. Stresi azaltır. Katyon değişim ve su tutma \nkapasitesini arttırır. Hem toprak hem de yapraktan uygulanabilir.\n', 'Organik madde %45 , organik karbon %22, toplam azot (N) %2 , suda çözünür (K2O) %2.4, Ph 4-6 ', '1Lt-5Lt-20Lt', 'Yapraktan, Damla sulama ile', '100lt suya 125-250cc , 1 da 500-2000cc', 'data/product/ou-success.png', 0),
+(11, 'RUNNER LIQUID', 'Organik Ürünler', '  İçeriğindeki yüksek organik madde miktarından dolayı toprak şartlarını düzenler. Toprak düzenleyicidir.\n Kök gelişimini arttırır ve saçak kökleri geliştirir. Katyon değişim kapasitesini arttırır. Topraktaki C/N oranını \ngeliştirir. Besin maddelerinin alımını kolaylaştırır. Organik karbon bağlamasını hızlandırır.\n', 'Organik madde %35, toplam azot %3, organik karbon %11, suda çözünür (K2O) %5,Ph 3.2-5.2 ', '5Lt-10Lt-20Lt', 'Yapraktan, Damla sulama ile', '100 lt suya 250 cc , 1 da 1-2 lt', 'data/product/ou-runner-liquid.png', 0),
+(12, 'AMİNO MAX', 'Organik Ürünler', 'Yüksek oranda L- alfa amino asitler içerir. AA, oligopeptit ve polypeptit oranları dengelidir.\n Protein sentezini ve klorofil miktarını arttırır. Stomaların açılmasını teşvik ederek, mikro ve makro bitki \nbesin elementlerinin alımını arttırır. Şelat ajanı gibi davranarak bitki besin elementlerinin alımını ve\n bitki içerisinde taşınımını sağlar.\n', 'Organik madde %50, max nem %20, serbest AA %20, organik azot (N) %4, organik karbon 20, Ph 4-6 ', '500gr', 'Uygulama', '100 lt suya 50-125gr ', 'data/product/ou-amino-max.png', 0),
+(13, 'ENN CALL', 'Özel Ürünler', 'Kalsiyum nitrat ve bor çözeltisidir. Hücre yapısında bulunur. Azot metabolizması ve absorbsiyonu üzerine, \nprotein ve karbonhidratların taşınmasına etki eder. Birçok fizyolojik hastalığın (elmada acı benek, marulda uç \nyanıklığı, domateste çiçek burnu çürüklüğü...vb) tedavisinde kullanılır. Stres koşullarına karşı bitkilerde direnç ve \ndayanıklılığı arttırır. Bitkilerde enzim aktivasyonunda kullanılır. Hem damla sulama ile hem de yapraktan \nuygulanabilir. \n', 'Toplam azot %8, amonyum azotu %0.5, kalsiyum (CaO) %14, bor (B) %0.5,nitrat azotu (N) %7.5', '1Lt-5Lt-20Lt', 'Yapraktan,  Damla sulama ile', '100 lt suya 125-150cc, 1 da 1500-2000cc', 'data/product/op-enn-call.png', 0),
+(14, 'ENN MAG', 'Özel Ürünler', 'Bitkilerde klorofil oluşmasında önemli role sahiptir. Klorofil molekülünün yapı taşıdır. Bu sayede besin maddesi \nüretim hızı artar. Hem vegetatif hem de generatif gelişmeyi hızlandırır. Meyve bağlama miktarını ve kalitesini \narttırır. Hızlı gelişme dönemlerinde ve aşırı meyve tutmuş bitkiler magnezyum noksanlığına duyarlıdır. Bu \ndönemlerde güvenle kullanılabilecek eşsiz bir gübredir.Hem damla sulama ile hem de yapraktan uygulanabilir. \n', 'Nitrat azotu %6, magnezyum oksit (MgO) %9 ', '1Lt-5Lt-20Lt', 'Yapraktan,  Damla sulama ile', '100 lt suya 125-150cc, 1 da 1500-2000cc', 'data/product/op-enn-mag.png', 0),
+(15, 'MARINE LIQUID', 'Özel Ürünler', ' Yüksek miktarda alginik asit içermektedir. İçeriğindeki enzim ve organik maddeler sayesinde bitkinin stres \nkoşullarından çıkmasını sağlar. Hücre bölünmesi ve büyümesine teşvik eder. Çiçeklenme ve meyve oluşumunu \narttırır. Meyvelerde irileşme ve aroma artışı sağlar. Bitki gelişimini teşvik eder.  \n', 'Organik madde %10, suda çözünür(K2O) %3, alginik asit %0.9, max EC 12dS/m, \r Ph 7.2-9.2', '1Lt-5Lt-20Lt ', 'Yapraktan,  Damla sulama ile', '100 lt suya 150- 200cc, 1 da 1-1,5 lt', 'data/product/op-marine-liquid.png', 0),
+(16, 'HUMMER LIQUID K', 'Özel Ürünler', ' Yüksek verim için uygundur. İçerisindeki sitokinin meyvenin büyüklüğünü ve kalitesini arttırır, vegetatif büyüme\n ve kök sisteminin güçlü gelişmesini sağlar. Bitki hücre bölünmesine teşvik eder. Kullanıldığı zaman ağırlık ve\n boyut olarak gözle görünür farkındalık sağlar.  \n', 'Organik madde %25, toplam azot  %5, üre azotu (N) %5 , suda çözünür (K2O) %10,\r  Ph 5.3-7.3, max., Klor (Cl) %1 ', '1Lt-5Lt-20Lt', 'Yapraktan,  Damla sulama ile', '100 lt suya 250cc, 1 da 500-1000 cc', 'data/product/op-hummer-liquid-k.png', 0),
+(17, 'ALL MİX', 'İz Elementler', 'Bor (B), demir (Fe), mangan (Mn), Çinko (Zn) mikro bitki besin maddeleri karışımıdır. Bitkilerde stres koşullarına \nkarşı savunma mekanizmalarını güçlendirir. Enzimlerin yapısına girerek ve aktivasyonu sağlayarak proteinlerin \nsentezini, karbonhidratların üretimini, bitkilerde yeşil rengi veren klorofilin üretilmesini, fotosentez, solunum ve \nvitaminlerin üretilmesi gibi bir çok görevi üstlenirler. Kuvvetli gövde yapısı ve kök gelişimi sağlar. Meyve rengi ve \nkalitesini arttırır. Bitkilerde canlı çiçeklenme ve kuvvetli meyve bağlamayı sağlar.  \n', 'Demir (Fe) %5, çinko (Zn) %10, mangan (Mn) %2, bor (B) %1.5 ', '1Kg-5Kg-20Kg', 'Yapraktan,  Damla sulama ile', '100 lt suya 100-125 gr,  1 da 200-500 gr', 'data/product/ie-all-mix.png', 0),
+(18, 'OSİZİM PLUS', 'İz Elementler', ' Demir (Fe), mangan (Mn), Çinko (Zn) gibi sıvı mikro bitki besin maddeleri karışımıdır. %100 EDTA  şelatlı\n mikro besin maddeleri içeren eşsizbir yaprak gübresidir. Bitkilerde stres koşulların da savunma\n mekanizmalarını güçlendirir. Bitkilerde boğum aralarının kısalmasını ve gövdenin kalınlaşmasını arttırır.\n Bitkilerde canlı çiçeklenme ve kuvvetli meyve bağlamayı sağlar. Enzimlerin yapısına girerek proteinlerin\n sentezini, karbonhidratların üretimini, klorofilin üretilmesini, fotosentez, solunum ve vitaminlerin üretilmesi,\n kuvvetli gövde yapısı ve kök gelişimi sağlar. Meyve rengi ve kalitesini arttırır. Sıvı formu sayesinde bitkiler\n tarafından hızlı alınım sağlanır ve kullanıcıya kullanım kolaylığı sağlar.  \n', 'çinko (Zn) %5, mangan (Mn) %4.5', '1Lt-5Lt-20Lt ', 'Yapraktan, Damla sulama ile', '100 lt suya 125-250cc, 1 da 500-1000cc', 'data/product/ie-osizim-plus.png', 0),
+(19, 'ARROW FAITH %6 Fe', 'İz Elementler', '  EDDHA şelatlı demirdir. Arrow, orto-orto izomeri demir eksikliğini düzeltici arazi uygulamalarında kullanılır. \nDemir, redoks reaksiyonları ile ilgili birçok enzimin parçasıdır ve klorofil oluşumu için gereklidir. Bu eksikliğin \ntezahürü yaprakların sararmasına sebep olur. Kloroz en yatkın bitkiler narenciye, ıspanak, çilek, marul, elma, \nceviz, biber, gül, domates, çim, asmadır. Tedavi için Arrow Daith eddha kullanılmalıdır.   \n', ' Suda çözünür demir (Fe) %6, orto-orto EDDHA ile şelatlı demir (Fe) %4.8, EDDHA ile şelatlı demir (Fe), stabil Ph aralığı 3-9 ', '1Kg-5Kg-10Kg', 'Yapraktan, Damla sulama ile', '100 gr/ 100lt suya,  1-3 kg/da  ', 'data/product/ie-arrow-faith-6-fe.png', 0),
+(20, 'HEFE LACTİCO ZN', 'İz Elementler', 'Çinko içerikli bir üründür. Metabolik faliyetlerde rol oynar. Bazı enzimlerin aktivasyonunu sağlar. Soğuğa karşı \ndayanıklılığı arttırır, sürgün gelişimini destekler. Çinko noksanlığında görülen arazları gidererek; yapraklarda \ndamar aralarında görülen klorozu ve sürgün uçlarında rozet oluşumunu engeller. Tomurcuk sayısında ve polen \nmiktarında artış sağlayarak verime direkt etki eder. Özellikle tarla bitkilerinde dane verimiyle birlikte protein \nartışı sağlamış olur. Ayrıca içerdiği bazı özel maddelerden dolayı mantari hastalıkların oluşumunu engeller. \nHastalık oluşmuş bitkilerde tedaviye yardımcı olur.   \n', 'Çinko %3', ' 5 Kg', 'Yapraktan, Damla sulama ile', '100 lt suya 500 cc, 1 da 1lt', 'data/product/ie-hefe-lactico-zn.png', 0),
+(21, 'HEFESUM CUAJE', 'Özel Ürünler', 'Bitki tarafından hızla emilmek üzere formüle edilmiş bir ürün olup, meyve tutumunda bitkiler için hayati önem\n taşıyan çok sayıda fitoaleksin, polisakkarit, antioksidan, karbonhidrat vb. maddeler ve deniz yosunu özü içerir.\n Optimum besin alımını sağlar Kök gelişimini ve uzunluğunu teşvik eder. Yaprak kütlesini arttırır. Homojen ve\n canlı çiçeklenme sağlar. Meyve tutumunu arttırır.    \n', 'Organik madde %20, organik karbon %10, toplam azot (N) %2, K2O %5, Ph 6.5-8.5 ', ' 5 Kg', 'Yapraktan, Damla sulama ile', ' 100 lt suya 75-125cc , 1 da 250cc', 'data/product/ou2-hefesum-cuaje.png', 0),
+(22, 'HEFESUM GRANDE', 'Özel Ürünler', ' Hücre büyümesini ve çoğalmasını sağladığı için bir bitki destekleyicisi olarak çalışan ve sürgünlerin vejetatif \ngelişimini aktive etmeye katkıda bulunan bir büyüme düzenleyicisidir. Çiçeklenme, meyve tutumu ve gelişim \naşamalarında bitkinin ihtiyaç duyduğu tüm temel elementleri sağlar. Bu ürün, doğal bir süreçle fitoaleksinler, \npolisakkaritler, antioksidanlar ve karbonhidratlarla şelatlanmıştır. Ayrıca, yüksek Ascophyllum nodosum yosunu \niçeriği sayesinde bitkiye besinler, bitkisel biyostimülanlar ve büyüme indükleyicileri sağlar.    \n', 'Fosfor (P2O5) %3.4, toplam potasyum (K2O) %18, alginik asit %2.5, mannitol %0.85, \r ascophyllum nodosum yosunu özünden türetilmiş %17', '', 'Yapraktan, Damla sulama ile', '100 lt suya 80-125cc, 1 da 125-250cc', 'data/product/ou2-hefesum-grande.png', 0),
+(23, 'JUNGLE', 'Özel Ürünler', 'Hızlı büyüyen mikroorganizmalar temelinde geliştirilen, en aktif kök tüyleri üzerinde olumlu etkileşim yaratan\n kök gelişim indükleyicisi. Piyasadaki en etkili mikrobiyolojik ajan olduğu kanıtlanmıştır. Her türlü ekin,\n futbol sahası, golf sahası vb. için uygundur.Kök gelişimini teşvik eder. Toprak yapısını iyileştirir.\n Toprağın su tutma kapasitesini artırır.     \n', 'Organik madde %15, organik karbon %8, toplam azot %1.5, Ph 5-7', '', 'Yapraktan, Damla sulama ile', '100 lt suya 75-125cc, 1 da 100-200 cc.', 'data/product/ou2-jungle.png', 0),
+(24, 'GREYNER', 'Özel Ürünler', 'Tahılların gelişimi ve büyümesi için mükemmel bir üründür. Brossinosteroidler, aminoasitler, mikroalgler, \nmanganez ve çinko ,içeren özel formülü ile bitkileri güçlendiririr, hasatı kolaylaştırır, verim, şeker içeriği, renk ve \nsertlik gibi özellikleri iyileştirir.     \n', 'Mangan (Mn) %5, çinko (Zn) %5, mikroalg esans %15 ', '500gr', 'Uygulama', 'Yapraktan veya herhangi bir sulama sistemiyle uygulanabilir.\rTahıllar için vegetasyon döneminde 1-2 kez 0.5-2Lt/ha 100-300Lt su ile. Mısır için 3-6 yapraklı ve tomurcuklanma döneminde 0.5-2Lt/ha 100-300Lt su ile. ', 'data/product/ou2-greyner.png', 0),
+(25, 'OSİ CU', 'Fosfor-İz Elementler', 'Bitkilerin fosfor ve bakır ihtiyacını yüksek düzeyde karşılar. Çok sayıda hayati enzimi aktive eder. \nFormülasyonundaki phytoalexin iyonundan dolayı çift etkilidir. Phytoalexin iyonlarının bitki tarafından alınımı ve \ntaşınımı çok yüksek düzeydedir. Bitkilerin özellikle mildiyö(oomicetes)olmak üzere, mantari parazitlerin \netkilerinden korunma mekanizmalarını geliştirir. Bitkilerin phytophthoradan korunmasına etkilidir. Dolayısıyla \nbu mantarların neden olduğu zamklanma, çürüme, ve sulanmış meyve oluşumunun önüne geçilir. Sap, kök, \ngövde ve yapraklardan tamamen emilir. Her türlü mahsulen uygulanabilir. Yapraktan uygulamada özellikle \ngövde ve yapraklar ıslatılmalıdır.      \n', 'Bakır (cu) %5,  toplam fosfor (P2O5) %30, Ph 1.2 , 1Lt 1.25Kg ', '1Lt-5Lt-20Lt', 'Yapraktan, Damla sulama ile', '100 lt suya 100-250cc, 1 da 500-1000cc', 'data/product/fie-osi-cu.png', 0),
+(26, 'OSİ CA', 'Fosfor-İz Elementler', 'Azot metabolizması ve absorbiyonu üzerine, protein ve karbonhidratların taşımasına etki eder. Birçok fizyolojik hastalığın\n (elmada acı benek, marulda uç yanıklığı domateste çiçek burnu çürüklüğü...vb) tedavisinde kullanılır. Stres koşullarına karşı\n bitkide direnç ve dayanıklılığı arttırır. Enzim aktivasyonunda kullanılır. Hem damla sulama ile hem de yapraktan uygulanabilir.\n Phytoalexin iyonlarının emilim ve taşınımına katkısı büyüktür. Bitkilerin özellikle mildiyö (oomicetes)olmak üzere, mantari\n parazitlerin etkilerinden korunma mekanizmalarını geliştirir. Dolayısıyla bu mantarların neden olduğu zamklanma, çürüme\n ve sulanmış meyve oluşumunun önüne geçilir. Sap, kök, gövde ve yapraklardan tamamen emilir. Her türlü mahsulen\n uygulanabilir. Yapraktan uygulamada özellikle gövde ve yapraklar ıslatılmalıdır.      \n', 'Suda çözünen bakır (Cu) %5', '1Lt-5Lt-20Lt', 'Yapraktan, Damla sulama ile', '100 lt suya 100-250cc, 1 da 500-1000cc', 'data/product/fie-osi-ca.png', 0),
+(27, 'OSİ ZN', 'Fosfor-İz Elementler', 'Bitkilerde çiçekleme ve polen oluşumunu arttırır. Azot emilimini arttırır dolayısıyla vegetatif büyüme süresince\n belirli aralıklarla uygulanması gereklidir. Verim ve kalite üzerine direk etkilidir. Yapısındaki fosfit iyonundan ötürü\n çift etkilidir. Phytoalexin iyonlarının bitki tarafından emilimi vec taşınımı çok yüksek düzeydedir.Bitkilerin\n özellikle mildiyö (oomicetes)olmak üzere, mantari parazitlerin etkilerinden korunma mekanizmalarını geliştirir.\n Dolayısıyla bu mantarların neden olduğu zamklanma, çürüme ve sulanmış meyve oluşumunun önüne geçilir.\n Sap, kök, gövde ve yapraklardan tamamen emilir. Her türlü mahsulen uygulanabilir. Yapraktan uygulamada\n özellikle göv de ve yapraklar ıslatılmalıdır.      \n', ' Suda çözünür çinko (Zn) %7', '1Lt-5Lt-20Lt', 'Yapraktan, Damla sulama ile', '100 lt suya 100-250cc, 1 da 500-1000cc', 'data/product/fie-osi-zn.png', 0),
+(28, 'LAİKA', 'Fosfor-İz Elementler', 'Bitkilerin fosfor ve azot ihtiyacını yüksek düzeyde karşılar. Çiçek oluşumunu arttırır. Boğum aralarını daraltır. Bitki \ndokularını sıkılaştırır.Yapısındaki fosfit iyonundan ötrü çift etkilidir. Phytoalexin iyonlarının bitki tarafından emilimi ve \ntaşınımı çok yüksek düzeydedir.Bitkilerin özellikle mildiyö (oomicetes)olmak üzere, mantari parazitlerin etkilerinden \nkorunma mekanizmalarını geliştirir. Dolayısıyla bu mantarların neden olduğu zamklanma, çürüme, ve sulanmış meyve \noluşumunun önüne geçilir. Sap, kök, gövde ve yapraklardan tamamen emilir. Her türlü mahsulen uygulanabilir. \nYapraktan uygulamada özellikle gövde ve yapraklar ıslatılmalıdır.      \n', 'Toplam potasyum (K2O) %20', '1Lt-5Lt-20Lt', 'Yapraktan, Damla sulama ile', '100 lt suya 100-250cc, 1 da 500-1000cc', 'data/product/fie-laika.png', 0),
+(29, 'FLASH WETT', 'Ph Düzenleyiciler', 'Yeni nesil organik silikon grubuna ait süper yayıcıdır. Geleneksel yayıcılara göre zerreciklerin yüzey gerilimini \nçok daha fazla azaltarak pestisit ve gübrelerin bitki yüzeyinde çok daha iyi ve homojen yayılmasını sağlar ve\n performansını arttırır. Ayrıca bitkilerin farklı gelişme dönemlerine göre ulaşması güç noktalara erişip çok daha\n iyi bir kaplama sağlar.      \n', 'Organik madde %20, organik karbon %10, toplam azot (N) %2, K2O %5, Ph 6.5-8.5', '', 'Yapraktan, Damla sulama ile', '100 lt suya 75-125cc, 1 da 250cc', 'data/product/pd-flash-wett.png', 0),
+(30, 'NeD WETT', 'Ph Düzenleyiciler', 'İlaçların homojen ve ince bir tabaka halinde bitkilerin yüzeyinin kaplanmasını sağlar.  İlkbaharda ağaçların \ntomurcuklarının ilaçlanması gerektiğinde bu tomurcuklar istenildiği şekilde ilaçlanamamaktadır. Çünkü ilaç \ntomurcukta tutunamamakta ve akıp gitmektedir. Daha sonraları da bitkiler üzerinde kaygan ve tüylü satıhlar, \nkurtların ve örümceklerin ağları, ilacın yayılma yapışma kabiliyetini azaltmaktadır. Bu gibi durumlarda NeD WETT \nkullanmak kaçınılmaz olmaktadır.  Ned WETT ilaçların leke yapmalarını önler. Meyvelerde ve süs bitkilerinde leke \nbulunması müstahsil ve  tüketici için arzu edilmez.       \n', '', '', 'Fungusitler ile , İnsektisitler ile, Yaprak gübreleri ve bgd’ler ile, Herbisitler ile', '25 cc / 100 lt.,  25 cc/ 100 lt., 25 cc / 100 lt.,50 cc / 100 lt.', 'data/product/pd-ned-wett.png', 0),
+(31, 'OSİ LİCON', 'Ph Düzenleyiciler', ' Kullanılan ilaç ve yaprak gübrelerinin mükemmel bir şekilde ve eşit oranda yayılmasını ve yapışmasını sağlar.\n Bitki koruma ve bitki besleme ürünlerinin etkinliğini artırır. Islanması zor olan yaprak yüzeylerinin hızlı ve tam\n olarak ıslanmasını sağlar. Suyun yüzey gerilimini azaltarak temas yüzeyini çoğaltır.       \n', '%100 Silicone-polyether copolymer', '', 'Fungusitler ile , İnsektisitler ile, Yaprak gübreleri ve bgd’ler ile, Herbisitler ile', '10-20 ml / 100 lt. suya ,  10-20 ml / 100 lt. suya , 10-20 ml / 100 lt. suya ,10-20 ml / 100 lt. suya ', 'data/product/pd-osi-licon.png', 0),
+(32, 'SİLY CONE 100', 'Ph Düzenleyiciler', 'İlaçların uygulamaya hazırlanması sırasında aşırı köpük oluşmasını engellemek açısından Sily Cone 100, karışıma \nen son olarak ilave edilmelidir. İlaçları etiketlerindeki tavsiyelerine uygun olarak hazırladıktan sonra 1/2-1/3 üne \nkadar su ile doldurulmuş ilaçalma tankına aletin karıştırıcısı çalışır durumdayken ilave ediniz, tanka su ilave \netmeye devam ediniz. Tankın dolmasına yakın bir zamanda gereken miktarda Sily Cone 100 ü tanka boşaltınız ve \ntankı su ile doldurunuz.       \n', '%100 Silicone-polyether copolymer', '', 'Fungusitler ile , İnsektisitler ile, Yaprak gübreleri ve bgd’ler ile, Herbisitler ile', '10-20 ml / 100 lt. suya ,  10-20 ml / 100 lt. suya , 10-20 ml / 100 lt. suya ,10-20 ml / 100 lt. suya ', 'data/product/pd-sily-cone-100.png', 0),
+(33, 'PH FİLM', 'Yayıcı-Yapıştırıcılar', ' İlaçların dekompoze olma sürelerini istenilen seviyeye getirir. İlaçların leke yapmalarını önler. PH FİLM, ilaçların \nhomojen ve ince bir tabaka halinde bitkilerin yüzeyinin kaplanmasını sağlar.    \n', '', '', 'PH 7-7.5 arasında uygulanacak doz , PH 7.5 üzerinde uygulanacak doz', 'Bağ 25 cc / 100 lt su - Elma Kiraz Şeftali 25 cc / 100 lt su - Pamuk 25 cc / 100 lt su - Sebze 25 cc / 100 lt su, Bağ 50 cc / 100 lt su - Elma Kiraz Şeftali 50 cc / 100 lt su - Pamuk 50 cc / 100 lt su - Sebze 50 cc / 100 lt su', 'data/product/yy-ph-film.png', 1),
+(34, 'STABİLİZER FİLM', 'Yayıcı-Yapıştırıcılar', 'İlaçların leke yapmalarını önler. Stabilizer film, ilaçların homojen ve ince bir tabaka halinde bitkilerin yüzeyinin \nkaplanmasını sağlar. Stabilizer, Bordo bulamacı ile karıştırılmamalıdır. Stabilizer aşındırıcı etkiye sahiptir.    \n', '', '', 'PH 7-7.5 arasında uygulanacak doz , PH 7.5 üzerinde uygulanacak doz', 'Bağ 25 cc / 100 lt su - Elma Kiraz Şeftali 25 cc / 100 lt su - Pamuk 25 cc / 100 lt su - Sebze 25 cc / 100 lt su, Bağ 50 cc / 100 lt su - Elma Kiraz Şeftali 50 cc / 100 lt su - Pamuk 50 cc / 100 lt su - Sebze 50 cc / 100 lt su', 'data/product/yy-stabilizer-film.png', 1),
+(35, 'SÜLFANEXT', 'Yayıcı-Yapıştırıcılar', 'Toprak ıslahında kullanılmak üzere formulize edilmişlerdir. Toprak pH ını ayarlayarak topraktan makro ve mikro\n elementlerin alımını kolaylaştırırlar. Topraktaki kireç oluşumunu önleyerek tuzluluğu giderirler. pH ın düşmesiyle \nverimi arttırırlar. Ürünün daha erken olgunlaşmasına yardımcı olur.     \n', '', '', 'Damla sulama ile', '1 da 1-2 Lt', 'data/product/yy-sülfanext.png', 0),
+(36, 'OSİ SULPHUR', 'Yayıcı-Yapıştırıcılar', 'Toprak ıslahında kullanılmak üzere formalize edilmişlerdir. Toprak pH’ını ayarlayarak topraktan makro ve mikro\n elementlerin alımını kolaylaştırırlar. Topraktaki kireç oluşumunu önleyerek tuzluluğu giderirler. pH’ın düşmesiyle \nverimi arttırırlar. Ürünün daha erken olgunlaşmasına yardımcı olur.      \n', '', '', 'Damla sulama ile', '1 da 1-2 Lt', 'data/product/yy-osi-sulphur.png', 0),
+(37, 'HEFEFOL SERİSİ ; 20-20-20 + (2MgO) + ME ; 13-40-13 + (2MgO) + ME ; 12-7-36 + (2MgO) + ME', 'NPK', 'Tarımsal üretimin temeli topraktır. Tarımda istenilen miktar ve kalitede ürünün elde edilmesinin birinci şartı ise toprakların verimliliklerinin\n arttırılmasıdır. Toprak verimliliğini arttırmada en önemli faktörlerden biri ise bitki besin elementleridir. Besin elementleri bitki gelişiminin önemli\n bir parçası olup bir veya daha fazlasının noksanlığı verim ve kaliteyi olumsuz yönde etkilemektedir. Topraklardan en uygun verimi alabilmek için\n ise dengeli gübreleme yapmak ve bitki besin elementlerinin noksanlığını gidermek şarttır. Bitkiler yaşamları için gerekli elementlerini kök üstü\n organlarıyla havadan ve kökleriyle yetiştirildikleri ortamdan alırlar. Makro ve mikro besin elementleri bitkinin ihtiyaç duyduğu zamanda yeterli\n ve doğru miktarda verildiği zaman bitkisel gelişim optimum seviyede karşılanmış olur. Bu nedenle doğru ve dengeli beslenme yapabilmek için\n gübreleme programı doğrultusunda hareket ederek bitki için optimum gelişim sağlayacak ürünler tercih edilmelidir.\n Hefefol ve Succesfol içerdiği izelement ve yüksek Mg sayesine klorofil sentezlenmesini arttırır ve yüksek verim sağlar. Sodyum (Na) ve klor (Cl)\n içermediğinden çok hızlı alınır ve toprakta Na ve Cl birikmesine neden olmadığından toprağın çoraklaşmasını önler.       \n', '', '', 'Yapraktan, Damla sulama ile', '100 lt suya 200cc, 1 da 1-3 Kg ', 'data/product/npk-hefefol-serisi.png', 0),
+(38, 'SUCCESFOL SERİSİ ; 18-18-18 + (2MgO) + ME ; 15-35-10 + (2MgO) + ME ; 15-10-25 + (2MgO) + ME ; 10-5-35 + (2MgO) + ME', 'NPK', 'Tarımsal üretimin temeli topraktır. Tarımda istenilen miktar ve kalitede ürünün elde edilmesinin birinci şartı ise toprakların verimliliklerinin\n arttırılmasıdır. Toprak verimliliğini arttırmada en önemli faktörlerden biri ise bitki besin elementleridir. Besin elementleri bitki gelişiminin önemli\n bir parçası olup bir veya daha fazlasının noksanlığı verim ve kaliteyi olumsuz yönde etkilemektedir. Topraklardan en uygun verimi alabilmek için\n ise dengeli gübreleme yapmak ve bitki besin elementlerinin noksanlığını gidermek şarttır. Bitkiler yaşamları için gerekli elementlerini kök üstü\n organlarıyla havadan ve kökleriyle yetiştirildikleri ortamdan alırlar. Makro ve mikro besin elementleri bitkinin ihtiyaç duyduğu zamanda yeterli\n ve doğru miktarda verildiği zaman bitkisel gelişim optimum seviyede karşılanmış olur. Bu nedenle doğru ve dengeli beslenme yapabilmek için\n gübreleme programı doğrultusunda hareket ederek bitki için optimum gelişim sağlayacak ürünler tercih edilmelidir.\n Hefefol ve Succesfol içerdiği izelement ve yüksek Mg sayesine klorofil sentezlenmesini arttırır ve yüksek verim sağlar. Sodyum (Na) ve klor (Cl)\n içermediğinden çok hızlı alınır ve toprakta Na ve Cl birikmesine neden olmadığından toprağın çoraklaşmasını önler.       \n', '', '', 'Yapraktan, Damla sulama ile', '100 lt suya 200cc, 1 da 1-3 Kg ', 'data/product/npk-succesfol-serisi.png', 0),
+(39, 'OSİ K 3+0+36+%3 EDTA', 'NPK', 'NK gübre çözeltisidir. %3 EDTA şelatlı, bitkiler tarafından alınabilirliği yüksek, hem yapraktan hem de \ndamlamadan kullanılabilen sıvı potasyum solüsyonudur. Protein sentezini teşvik ederek daha renkli ve aromalı \nmeyve oluşmasını sağlar. Bu yolla meyvede kuru madde miktarında artış sağlar. Kalsiyum ve magnezyum \nalınımını teşvik eder, bitki besin maddesi üretimini arttırır. Bitkilerde boğum aralarının kısalmasını, gövde ve \ndalların kalınlaşmasını sağlar. Bitki dokularının sıkılaşmasını ve sertleşmesini sağlar. Meyve rengi, aroması ve raf \nömrünü arttırır.        \n', 'Toplam azot %3, toplam potasyum (K2O) %36, üre azotu %3', '1Lt-5Lt-20Lt', 'Yapraktan, Damla sulama ile', '100 lt suya 150-250cc,  1 da 1000-3000cc', 'data/product/npk-osi-k-3+0+36+3-edta.png', 0),
+(40, 'HEFE ORGANIC WP', 'Ruhsatlanacak Ürünler', 'Biostimulant product with a balanced formula of vegetal origin amino acids, sulfuric and non-sulfuric acids and \nmolybdenum. Its exclusive formulation makes it the standard product for high plant nutrition. Greater uniformity and quality of the fruit. Increases the resistance of the plant. Improves soil structure and boosts the development of the roots.\n', 'Free amino acids 19%, Vitamin traces and Molybdenum 20%', '', '', '', 'data/product/ru-hefe-organic-wp.png', 0),
+(41, 'TWISTER 800products', 'Ruhsatlanacak Ürünler', ' Product based on natural seaweed that improves rooting and grip of the plant. It also combats saline stress and\n stimulates the plant’s productive capacity. Stimulates growth, flowering, maturation and fruit set. Quick absorption by the plant producing an immediate effect.\n ', 'Algae extract 30%, Free amino acids 0.6%, Cytokines 0.08%', '', '', '', 'data/product/ru-twister-800.png', 0),
+(42, 'HUMIXTRACT', 'Ruhsatlanacak Ürünler', ' humiXtract improves the physio-chemical and biological characteristics of the soil for the formation of tubers,\n fruit set an lignification of the buds. Optimizes energetic processes related to respiration and synthesis of nucleic acids. Incresases soil’s nitrogen fixing capacity. Promotes the assimilation of soil nutrients and stimulates root growth.\n ', 'Total humic extract 70%, Total fulvic acid 63%, Total potassium 10%', '', '', '', 'data/product/ru-humixtract.png', 0),
+(43, 'HEFE BRIX', 'Ruhsatlanacak Ürünler', 'Liquid fertilizer with potassium, organic matter and amino acids. Its formulation makes it an ideal fertilizer\n for fruit ripeninng and coloration. Increases brix or sugar contents of fruits. Improves quality, flavor, consistency and conservation. Increases visibly the color of fruits.\n ', 'Total nitrogen (N) 2%, Total water-soluble potassium (K2O) 28%, Total organic matter 13.9%, \r (Total organic carbon 5.2%- Fulvic acids 4.9%) Free amino acids 8%, Alginic acid 1.84%, Mannitol 0.35% derived\r  from Ascophyllum nodusum algae extract 10%)', '', '', '', 'data/product/ru-hefe-brix.png', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `product_types`
+--
+
+CREATE TABLE `product_types` (
+  `idproduct_types` int(11) NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `diff` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Tablo döküm verisi `product_types`
+--
+
+INSERT INTO `product_types` (`idproduct_types`, `name`, `diff`) VALUES
+(1, 'Biostimulantlar', 0),
+(2, 'Organik Ürünler', 0),
+(3, 'Özel Ürünler', 0),
+(4, 'İz Elementler', 0),
+(5, 'Fosfor-İz Elementler', 0),
+(6, 'Ph Düzenleyiciler', 0),
+(7, 'Yayıcı-Yapıştırıcılar', 0),
+(8, 'NPK', 0),
+(9, 'Ruhsatlanacak Ürünler', 1);
+
+--
+-- Dökümü yapılmış tablolar için indeksler
+--
+
+--
+-- Tablo için indeksler `best_products`
+--
+ALTER TABLE `best_products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Tablo için indeksler `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Tablo için indeksler `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`idproducts`);
+
+--
+-- Tablo için indeksler `product_types`
+--
+ALTER TABLE `product_types`
+  ADD PRIMARY KEY (`idproduct_types`);
+
+--
+-- Dökümü yapılmış tablolar için AUTO_INCREMENT değeri
+--
+
+--
+-- Tablo için AUTO_INCREMENT değeri `best_products`
+--
+ALTER TABLE `best_products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Tablo için AUTO_INCREMENT değeri `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- Tablo için AUTO_INCREMENT değeri `products`
+--
+ALTER TABLE `products`
+  MODIFY `idproducts` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- Tablo için AUTO_INCREMENT değeri `product_types`
+--
+ALTER TABLE `product_types`
+  MODIFY `idproduct_types` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -6,7 +6,7 @@
     
         <link rel="icon" href="public/img/logo-white.png" type="image/x-icon">
     
-        <title>CMC Organik - Şirketimiz</title>
+        <title>CMC Organik</title>
     
         <!-- CDN Links -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="public/css/owl.css?v=1">
         <link rel="stylesheet" href="public/css/features.css?v=1">
         <link rel="stylesheet" href="public/css/general.css?v=1">
+
         <!-- CSS Libs -->
         <link rel="stylesheet" href="assets/css/bootstrap.css?v=1">
         <link rel="stylesheet" href="assets/css/owl.carousel.css">
@@ -31,7 +32,7 @@
         <main>
             <!-- Partials include -->
             <?php include 'views/partials/header.php'; ?>
-            <?php include 'views/partials/cinfo.php'; ?>
+            <?php include 'views/partials/error.php'; ?>
             <?php include 'views/partials/footer.php'; ?>
         </main>
         <!-- JS Lib -->
@@ -40,7 +41,7 @@
         <script src="assets/js/owl.carousel.js"></script>
         <!-- JS Files -->
         <script src="public/js/theme.js"></script>
-        <script src="public/js/owl.js?v=2"></script>
+        <script src="public/js/owl.js"></script>
         <script src="public/js/topbar.js"></script>
         <script src="public/js/search.js"></script>
     </body>

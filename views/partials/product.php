@@ -2,24 +2,53 @@
 require_once __DIR__ . '/../../config/database.php';
 
 $category = isset($_GET['category']) ? $_GET['category'] : null;
+$search = isset($_GET['q']) ? trim($_GET['q']) : null;
 
 
-if($category) {
+if ($search) {
+    $sql = "SELECT * FROM products WHERE name LIKE :q OR description LIKE :q OR contents LIKE :q OR applyType LIKE :q OR apply LIKE :q OR type LIKE :q";    
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute(['q' => '%' . $search . '%']);
+    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $pageTitle = "Arama Sonucu: " . htmlspecialchars($search);
+
+    if(count($products) === 0) {
+        $pageTitle .= " (Sonuç Bulunamadı, tüm ürünler listeleniyor)";
+
+        $sqlAll = "SELECT * FROM products";
+        $stmtAll = $pdo->prepare($sqlAll);
+        $stmtAll->execute();
+        $products = $stmtAll->fetchAll(PDO::FETCH_ASSOC);
+
+        $showWarning = true;
+    } else {
+        $showWarning = false;
+    }
+} elseif ($category) {
     $sql = "SELECT * FROM products WHERE type = :category";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['category' => $category]);
+    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $pageTitle = "Kategori: " . htmlspecialchars($category);
+    $showWarning = false;
 } else {
     $sql = "SELECT * FROM products";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
+    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $pageTitle = "Tüm Ürünler";
+    $showWarning = false;
 }
-
-
-$products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 <section class="container py-5">
-    <h2 class="pb-2 border-bottom"><?= htmlspecialchars($category ?: 'Tüm Ürünler') ?></h2>
+    <h2 class="pb-2 border-bottom"><?= $pageTitle ?></h2>
+    <?php if (!empty($showWarning) && $showWarning): ?>
+        <div class="alert alert-warning">
+            Aramanıza uygun sonuç bulunamadı. Tüm ürünler listelenmektedir.
+        </div>
+    <?php endif; ?>
     <div class="row g-4">
     <?php foreach ($products as $product): ?>
         <div class="col-md-4">

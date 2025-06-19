@@ -10,7 +10,7 @@
             <div class="fb-page"
                data-href="https://www.facebook.com/cmcorganikizmir"
                data-tabs="timeline"
-               data-width="500"
+               data-width="400"
                data-height="1000"
                data-small-header="false"
                data-adapt-container-width="true"
