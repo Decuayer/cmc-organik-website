@@ -41,7 +41,7 @@
                         Pazarlama ve satış sonrası, teknik departmanı ile ürünlerinin doğru ve etkin kullanımına yönelik üreticilerimize
                         hizmet vermektedir. Bu konuda yatırımlarına devam etmektedir
                     </p>
-                    <p><a class="btn btn-lg btn-success" href="editing.php">İletişim</a></p>
+                    <p><a class="btn btn-lg btn-success" href="contact.php">İletişim</a></p>
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@
                         Devamlı araştırma geliştirme süreci yaşayan firmamız tarımda kullanılan bitki besleme ürünleri konusunda her zaman
                         zengin ürün yelpazesi oluşturmuştur
                     </p>
-                    <p><a class="btn btn-lg btn-success" href="editing.php">Ürünlerimiz</a></p>
+                    <p><a class="btn btn-lg btn-success" href="bproducts.php">Ürünlerimiz</a></p>
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@
                         CMC Organik Tarım hem ürün portföyünü hem de satış ve teknik kadrolarını güçlendirerek Türkiye'nin her noktasına
                         ulaşma ve çiftçilerimizin çözüm ortağı olma gayretindedir
                     </p>
-                    <p><a class="btn btn-lg btn-success" href="editing.php">Galeri</a></p>
+                    <p><a class="btn btn-lg btn-success" href="gallery.php">Galeri</a></p>
                 </div>
             </div>
         </div>

@@ -58,5 +58,6 @@ if(!$product) {
         <script src="public/js/theme.js"></script>
         <script src="public/js/owl.js?v=1"></script>
         <script src="public/js/topbar.js"></script>
+        <script src="public/js/search.js"></script>
     </body>
 </html>

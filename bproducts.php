@@ -16,7 +16,7 @@ $category = isset($_GET['category']) ? $_GET['category'] : null;
         <!-- CDN Links -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- CSS Files -->
-        <link rel="stylesheet" href="public/css/header.css?v=1">
+        <link rel="stylesheet" href="public/css/header.css">
         <link rel="stylesheet" href="public/css/carousel.css?v=1">
         <link rel="stylesheet" href="public/css/product.css?v=2">
         <link rel="stylesheet" href="public/css/owl.css?v=1">
@@ -47,6 +47,6 @@ $category = isset($_GET['category']) ? $_GET['category'] : null;
         <script src="public/js/theme.js"></script>
         <script src="public/js/owl.js?v=2"></script>
         <script src="public/js/topbar.js"></script>
-
+        <script src="public/js/search.js"></script>
     </body>
 </html>

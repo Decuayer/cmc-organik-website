@@ -43,5 +43,6 @@
         <script src="public/js/theme.js"></script>
         <script src="public/js/owl.js"></script>
         <script src="public/js/topbar.js"></script>
+        <script src="public/js/search.js"></script>
     </body>
 </html>

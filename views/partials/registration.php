@@ -1,6 +1,6 @@
 <?php
 $dir = __DIR__ . '/../../data/registration';
-$baseUrl = '/cmc-organik-website/data/registration/';
+$baseUrl = '/data/registration/';
 $pdfs = glob($dir . '/*.pdf');
 ?>
 

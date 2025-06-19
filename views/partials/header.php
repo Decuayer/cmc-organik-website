@@ -92,11 +92,15 @@ $productTypes = $typesQuery->fetchAll(PDO::FETCH_ASSOC);
                         <a class="nav-link <?= ($currentPage == 'contact.php') ? 'active' : '' ?>" aria-current="page" href="contact.php">İletişim</a>
                     </li>
                 </ul>
-                <form class="d-flex mt-3 mt-lg-0" role="search">
-                    <input class="form-control me-2 search" type="search" placeholder="Ara" aria-label="Search">
+                <form id="searchForm" class="d-flex mt-3 mt-lg-0 position-relative" role="search" method="GET" action="bproducts.php"autocomplete="off" style="max-width: 300px;">
+                    <input id="searchInput" class="form-control me-2 search" type="search" name="q" placeholder="Ara" aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
+                    <div id="liveSearchResults"
+                        class="bg-white border shadow-sm rounded position-absolute d-none"
+                        style="top: 100%; left: 0; width: 100%; z-index: 1000; max-height: 300px; overflow-y: auto;">
+                    </div>
                 </form>
             </div>
         </div>

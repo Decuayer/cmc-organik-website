@@ -1,10 +1,8 @@
 <div class="container pt-5 text-align-center">
     <main style="margin-top: 300px; margin-bottom: 300px;">
-        <h1>Güncellemeler Tamamlandı</h1>
-        <p class="lead">
-            Sitemizdeki büyük güncellemelerin çoğu tamamlandı. Yeni özellikler ve iyileştirmelerle hizmet vermeye devam ediyoruz.
-            Yenilikleri keşfetmek ve ürünlerimize göz atmak için <strong>anasayfamıza</strong> dönebilirsiniz.
-        </p>
+        <h1 class="text-danger">404</h1>
+        <h2 class="mb-3">Sayfa Bulunamadı</h2>
+        <p class="lead">Aradığınız sayfa mevcut değil, taşınmış olabilir veya yanlış bir bağlantı kullanmış olabilirsiniz.</p>
         <p class="lead text-align-center">
             <a href="index.php" class="btn btn-lg btn-success">Anasayfa</a>
         </p>
