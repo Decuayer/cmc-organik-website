@@ -24,6 +24,8 @@
         <link rel="stylesheet" href="assets/css/owl.theme.css">
     
     </head>
+    <!-- Pop Up Modal -->
+    <?php include 'views/partials/popup.php'; ?>
     <body>
         <!-- SVG icons include -->
         <?php include 'views/svg.php'; ?>
@@ -44,5 +46,6 @@
         <script src="public/js/owl.js"></script>
         <script src="public/js/topbar.js"></script>
         <script src="public/js/search.js"></script>
+        <script src="public/js/contact.js"></script>
     </body>
 </html>

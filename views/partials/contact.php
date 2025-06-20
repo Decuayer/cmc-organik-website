@@ -7,7 +7,7 @@
         <div class="row">
             <h2 class="pb-2 border-bottom">İletişim Formu</h3>
             <div class="col-md-7 mb-4">
-                <form action="form-handler.php" method="POST">
+                <form id="contact-form-page" action="/config/formhandler.php" method="POST">
                     <div class="mb-3">
                         <label for="name" class="form-label">Ad Soyad</label>
                         <input type="text" name="name" id="name" class="form-control" required>
@@ -20,7 +20,7 @@
 
                     <div class="mb-3">
                         <label for="phone" class="form-label">Telefon Numarası</label>
-                        <input type="text" name="phone" id="phone" class="form-control">
+                        <input type="text" name="phone" id="phone" pattern="[0-9\s\-\+\(\)]{8,20}" class="form-control">
                     </div>
 
                     <div class="mb-3">

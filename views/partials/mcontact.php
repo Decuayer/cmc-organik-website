@@ -7,7 +7,7 @@
     </p>
     <div class="row">
         <div class="col-md-9 mb-md-0 mb-5">
-            <form id="contact-form" name="contact-form" action="mail.php" method="POST">
+            <form id="contact-form-home" action="/config/formhandler.php" method="POST">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="md-form mb-0">
@@ -22,7 +22,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="md-form mb-0">
-                            <input type="text" id="email" name="email" class="form-control">
+                            <input type="email" id="email" name="email" required class="form-control">
                             <label for="email" class="">
                                 <svg class="bi" width="1em" height="1em">
                                     <use xlink:href="#envelope"/>
@@ -33,14 +33,25 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="md-form mb-0">
-                            <input type="text" id="subject" name="subject" class="form-control">
+                            <input type="text" id="phone" name="phone" pattern="[0-9\s\-\+\(\)]{8,20}" class="form-control">
                             <label for="subject" class="">
                                 <svg class="bi" width="1em" height="1em">
                                     <use xlink:href="#phone"/>
                                 </svg>
                                 Telefon
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="md-form mb-0">
+                            <input type="text" id="subject" name="subject" class="form-control">
+                            <label for="subject" class="">
+                                <svg class="subject" width="1em" height="1em">
+                                    <use xlink:href="#book"/>
+                                </svg>
+                                Konu
                             </label>
                         </div>
                     </div>
@@ -58,10 +69,10 @@
                         </div>
                     </div>
                 </div>
+                <div class="text-center text-md-left">
+                    <button type="submit" class="btn btn-success">Gönder</button>
+                </div>
             </form>
-            <div class="text-center text-md-left">
-                <a data-mdb-ripple-init class="btn btn-success" onclick="">Gönder</a>
-            </div>
             <div class="status"></div>
             </div>
             <div class="col-md-3 text-center">
