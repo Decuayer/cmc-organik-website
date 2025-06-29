@@ -8,8 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     input.addEventListener('input', function() {
         const query = this.value.trim();
-
-        console.log(input.value)
         
         if (isMobile() || query.length < 2) {
             resultsBox.classList.add('d-none');
@@ -17,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        fetch('/config/livesearch.php?q=' + encodeURIComponent(query))
+        fetch(location.origin + '/public/api/livesearch.php?q=' + encodeURIComponent(query))
             .then(response => response.json())
             .then(data => {
                 resultsBox.innerHTML = '';

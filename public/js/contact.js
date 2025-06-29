@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             const formData = new FormData(form);
 
-            fetch("/config/formhandler.php", {
+            fetch(location.origin + '/public/api/formhandler.php', {
                 method: "POST",
                 body: formData
             })

@@ -7,7 +7,7 @@
     </p>
     <div class="row">
         <div class="col-md-9 mb-md-0 mb-5">
-            <form id="contact-form-home" action="/config/formhandler.php" method="POST">
+            <form id="contact-form-home" action="/public/api/formhandler.php" method="POST">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="md-form mb-0">
