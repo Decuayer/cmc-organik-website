@@ -7,7 +7,7 @@
         <div class="row">
             <h2 class="pb-2 border-bottom">İletişim Formu</h3>
             <div class="col-md-7 mb-4">
-                <form id="contact-form-page" action="/config/formhandler.php" method="POST">
+                <form id="contact-form-page" action="/public/api/formhandler.php" method="POST">
                     <div class="mb-3">
                         <label for="name" class="form-label">Ad Soyad</label>
                         <input type="text" name="name" id="name" class="form-control" required>
