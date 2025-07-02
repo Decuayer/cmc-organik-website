@@ -48,7 +48,7 @@
                         <div class="md-form mb-0">
                             <input type="text" id="subject" name="subject" class="form-control">
                             <label for="subject" class="">
-                                <svg class="subject" width="1em" height="1em">
+                                <svg class="bi" width="1em" height="1em">
                                     <use xlink:href="#book"/>
                                 </svg>
                                 Konu
