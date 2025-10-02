@@ -52,7 +52,6 @@
             <div class="item" style="width:250px"><img src="public/img/cinfo/cinfo9.jpg" alt="9"></div>
             <div class="item" style="width:250px"><img src="public/img/cinfo/cinfo10.jpg" alt="10"></div>
             <div class="item" style="width:250px"><img src="public/img/cinfo/cinfo11.jpg" alt="11"></div>
-            <div class="item" style="width:250px"><img src="public/img/cinfo/cinfo12.jpg" alt="12"></div>
         </div>  
     </div>
 </div>

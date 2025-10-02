@@ -12,7 +12,7 @@ $productTypes = $typesQuery->fetchAll(PDO::FETCH_ASSOC);
         <div class="row align-items-center">
             <div class="col-12 col-md-8 d-flex flex-wrap align-items-center mb-2 mb-md-0">
                 <i class="fas fa-envelope me-2"></i>
-                <a href="mailto:cmcorganik@hotmail.com" class="text-white text-decoration-none me-3">cmcorganik@hotmail.com</a>
+                <a href="mailto:cmcorganik@cmcorganik.com" class="text-white text-decoration-none me-3">cmcorganik@cmcorganik.com</a>
                 <i class="fas fa-phone me-2"></i>
                 <a href="tel:+902324780078" class="text-white text-decoration-none">+90 (232) 478 00 78</a>
             </div>

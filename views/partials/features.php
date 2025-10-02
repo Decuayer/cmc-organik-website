@@ -24,7 +24,7 @@
             </p>
         </div>
         <div class="col-md-5 order-md-1">
-            <img src="public/img/aboutus2.jpg" alt="About" class="bd-placeholder-img rounded img-fluid" width="500" height="500">
+            <img src="public/img/aboutus2.JPG" alt="About" class="bd-placeholder-img rounded img-fluid" width="500" height="500">
         </div>
     </div>
 

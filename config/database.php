@@ -1,9 +1,9 @@
 <?php
 
 $host = 'localhost';
-$dbname = 'cmc';
-$username = 'root';
-$password = '';
+$dbname = 'cmcorganik_v1';
+$username = 'cmcorganik';
+$password = '2982tadtad';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
