@@ -55,8 +55,8 @@ $productTypes = $typesQuery->fetchAll(PDO::FETCH_ASSOC);
             <p>&copy; 2024 CMC Organik Tarım Ltd. Şti. - Bütün hakları saklıdır.</p>
             <ul class="list-unstyled d-flex">
                 <li class="ms-3"><a class="link-body-emphasis" href="https://www.twitter.com"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
-                <li class="ms-3"><a class="link-body-emphasis" href="https://www.facebook.com/cmcorganikizmir"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
-                <li class="ms-3"><a class="link-body-emphasis" href="https://www.instagram.com/cmcorganik/"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
+                <li class="ms-3"><a class="link-body-emphasis" href="https://www.instagram.com/cmcorganik/"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
+                <li class="ms-3"><a class="link-body-emphasis" href="https://www.facebook.com/cmcorganikizmir"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
             </ul>
         </div>
     </footer>

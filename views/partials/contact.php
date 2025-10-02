@@ -41,26 +41,28 @@
                     <h4 class="mb-4 text-success">İletişim Bilgileri</h4>
                     
                     <div class="mb-3">
-                        <i class="bi bi-geo-alt-fill me-2 text-success"></i>
+                        <i class="fas fa-location-dot me-2 text-success"></i>
                         <strong>Adres:</strong><br>
                         Ulucak Cumhuriyet, 9142. Sk No:2<br>
                         35735 Kemalpaşa / İzmir
                     </div>
                     
                     <div class="mb-3">
-                        <i class="bi bi-telephone-fill me-2 text-success"></i>
+                        <i class="fas fa-phone me-2 text-success"></i>
                         <strong>Telefon:</strong><br>
                         <a href="tel:+902324780078" class="text-decoration-none link-body-emphasis">+90 (232) 478 00 78</a>
                     </div>
                     
                     <div class="mb-3">
-                        <i class="bi bi-envelope-fill me-2 text-success"></i>
+                        <i class="fas fa-envelope me-2 text-success"></i>
                         <strong>E-posta:</strong><br>
                         <a href="mailto:cmcorganik@hotmail.com" class="text-decoration-none link-body-emphasis">cmcorganik@hotmail.com</a>
+                        <br>
+                        <a href="mailto:info@cmcorganik.com" class="text-decoration-none link-body-emphasis">info@cmcorganik.com</a>
                     </div>
                     
                     <div>
-                        <i class="bi bi-clock-fill me-2 text-success"></i>
+                        <i class="fas fa-clock me-2 text-success"></i>
                         <strong>Çalışma Saatleri:</strong><br>
                         Hafta içi 09:00 - 18:00
                     </div>

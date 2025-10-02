@@ -2,7 +2,7 @@
 require_once '../includes/auth.php';
 require_once '../../config/database.php';
 require_once '../includes/header.php';
-require '../includes/sidebar.php';
+require_once '../includes/sidebar.php';
 
 $productCount = $pdo->query("SELECT COUNT(*) FROM products")->fetchColumn();
 $categoryCount = $pdo->query("SELECT COUNT(*) FROM product_types")->fetchColumn();

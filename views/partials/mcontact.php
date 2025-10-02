@@ -86,11 +86,13 @@
                     </li>
                     <li>
                         <i class="fas fa-phone mt-4 fa-2x"></i>
-                        <p>+90 232 478 00 78</p>
+                        <a href="tel:+902324780078" class="text-decoration-none link-body-emphasis">+90 (232) 478 00 78</a>
                     </li>
                     <li>
                         <i class="fas fa-envelope mt-4 fa-2x"></i>
-                        <p>cmcorganik@hotmail.com</p>
+                        <br>
+                        <a href="mailto:cmcorganik@hotmail.com" class="text-decoration-none link-body-emphasis">cmcorganik@hotmail.com</a>
+                        <a href="mailto:info@cmcorganik.com" class="text-decoration-none link-body-emphasis">info@cmcorganik.com</a>
                     </li>
                 </ul>
             </div>

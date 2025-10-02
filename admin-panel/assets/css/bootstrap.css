@@ -1964,8 +1964,8 @@ progress {
 }
 
 .table-success {
-  --bs-table-color: #000;
-  --bs-table-bg: #d1e7dd;
+  --bs-table-color: #fff;
+  --bs-table-bg: #7fc34a;
   --bs-table-border-color: #a7b9b1;
   --bs-table-striped-bg: #c7dbd2;
   --bs-table-striped-color: #000;
