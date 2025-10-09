@@ -12,7 +12,9 @@
   <h5 class="d-flex align-items-center mb-3 text-success fw-bold fs-4">CMC Organik Admin Paneli</h5>
   <hr/>
   <ul class="nav nav-pills flex-column mb-auto">
+    <li><a href="dashboard.php" class="nav-link">Dashboard</a></li>
     <li><a href="products.php" class="nav-link">Ürünler</a></li>
+    <li><a href="best_products.php" class="nav-link">Öne Çıkan Ürünler</a></li>
     <li><a href="categories.php" class="nav-link">Kategoriler</a></li>
     <li><a href="comments.php" class="nav-link">Yorumlar</a></li>
     <li><a href="contact.php" class="nav-link">İletişim</a></li>
@@ -31,7 +33,9 @@
     <hr/>
     <div class="offcanvas-body">
         <ul class="nav nav-pills flex-column mb-auto">
+        <li><a href="dashboard.php" class="nav-link">Dashboard</a></li>
         <li><a href="products.php" class="nav-link">Ürünler</a></li>
+        <li><a href="best_products.php" class="nav-link">Öne Çıkan Ürünler</a></li>
         <li><a href="categories.php" class="nav-link">Kategoriler</a></li>
         <li><a href="comments.php" class="nav-link">Yorumlar</a></li>
         <li><a href="contact.php" class="nav-link">İletişim</a></li>

@@ -8,6 +8,20 @@ require_once '../../config/database.php';
 require_once '../includes/header.php';
 require_once '../includes/sidebar.php';
 
+// ID al
+$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+
+// Ürün bilgisi
+$stmt = $pdo->prepare("SELECT * FROM products WHERE idproducts = ?");
+$stmt->execute([$id]);
+$product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$product) {
+    echo '<div class="alert alert-danger">Ürün bulunamadı.</div>';
+    require_once '../includes/footer.php';
+    exit;
+}
+
 // Kategoriler
 $types = $pdo->query("SELECT * FROM product_types ORDER BY name ASC")->fetchAll(PDO::FETCH_ASSOC);
 
@@ -58,12 +72,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Insert
-    $insert = $pdo->prepare("
-        INSERT INTO products (name, type, description, contents, pack, applyType, apply, imgPath, applySeperate) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    // Update
+    $update = $pdo->prepare("
+        UPDATE products SET 
+            name = ?, 
+            type = ?, 
+            description = ?, 
+            contents = ?, 
+            pack = ?, 
+            applyType = ?, 
+            apply = ?, 
+            imgPath = ?, 
+            applySeperate = ?
+        WHERE idproducts = ?
     ");
-    $insert->execute([$name, $type, $description, $contents, $pack, $applyType, $apply, $imgPath, $applySeperate]);
+    $update->execute([$name, $type, $description, $contents, $pack, $applyType, $apply, $imgPath, $applySeperate, $id]);
 
     header("Location: products.php");
     exit;
@@ -71,12 +94,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <div class="content" id="content" style="padding: 20px;">
-    <h4 class="mb-4">Yeni Ürün Ekle</h4>
+    <h4 class="mb-4">Ürün Düzenle</h4>
     <form method="POST" enctype="multipart/form-data" class="row g-3">
 
         <div class="col-md-6">
             <label class="form-label">Ürün Adı</label>
-            <input type="text" name="name" class="form-control" required>
+            <input type="text" name="name" class="form-control" value="<?= htmlspecialchars($product['name']) ?>" required>
         </div>
 
         <div class="col-md-6">
@@ -84,44 +107,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <select name="type" class="form-select" required>
                 <option value="">Seçiniz</option>
                 <?php foreach ($types as $t): ?>
-                    <option value="<?= $t['name'] ?>"><?= htmlspecialchars($t['name']) ?></option>
+                    <option value="<?= $t['name'] ?>" <?= ($product['type'] == $t['idproduct_types']) ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($t['name']) ?>
+                    </option>
                 <?php endforeach; ?>
             </select>
         </div>
 
         <div class="col-12">
             <label class="form-label">Açıklama</label>
-            <textarea name="description" class="form-control" rows="3"></textarea>
+            <textarea name="description" class="form-control" rows="3"><?= htmlspecialchars($product['description']) ?></textarea>
         </div>
 
         <div class="col-12">
             <label class="form-label">İçerikler</label>
-            <textarea name="contents" class="form-control" rows="3"></textarea>
+            <textarea name="contents" class="form-control" rows="3"><?= htmlspecialchars($product['contents']) ?></textarea>
         </div>
 
         <div class="col-md-6">
             <label class="form-label">Ambalaj</label>
-            <input type="text" name="pack" class="form-control">
+            <input type="text" name="pack" class="form-control" value="<?= htmlspecialchars($product['pack']) ?>">
         </div>
 
         <div class="col-md-6">
             <label class="form-label">Uygulama Türü (Virgül ile ayır)</label>
-            <input type="text" name="applyType" class="form-control">
+            <input type="text" name="applyType" class="form-control" value="<?= htmlspecialchars($product['applyType']) ?>">
         </div>
 
         <div class="col-12">
             <label class="form-label">Uygulama (Virgül ile ayır)</label>
-            <textarea name="apply" class="form-control" rows="3"></textarea>
+            <textarea name="apply" class="form-control" rows="3"><?= htmlspecialchars($product['apply']) ?></textarea>
         </div>
 
         <div class="col-md-6">
-            <label class="form-label">Ürün Görseli</label>
+            <label class="form-label">Ürün Görseli</label><br>
+            <img src="../../<?= htmlspecialchars($product['imgPath']) ?>" alt="Mevcut Görsel" style="max-height: 100px; display:block; margin-bottom:10px;">
             <input type="file" name="imgPath" class="form-control">
         </div>
 
         <div class="col-md-6 d-flex align-items-center">
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="applySeperate" id="applySeperate">
+                <input class="form-check-input" type="checkbox" name="applySeperate" id="applySeperate" <?= $product['applySeperate'] ? 'checked' : '' ?>>
                 <label class="form-check-label" for="applySeperate">
                     Ayrı Uygulama Var mı? (Dozları ayrı sütunlarda göster. Aktif olduğunda, "-" ile ayrılmış dozlar ayrı sütunlarda gösterilir. "," ile sütunlar ayrılır.")
                 </label>
