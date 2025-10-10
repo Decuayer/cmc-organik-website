@@ -40,13 +40,13 @@ $productTypes = $typesQuery->fetchAll(PDO::FETCH_ASSOC);
                 </ul>
             </div>
             <div class="col-md-5 offset-md-1 mb-3">
-                <form>
+                <form action="/public/api/newsletter_subscribe.php" method="POST">
                     <h5>Bültenimize abone olun</h5>
                     <p>Bizden gelen yeni ve heyecan verici şeylerin aylık özeti.</p>
                     <div class="d-flex flex-column flex-sm-row w-100 gap-2">
                         <label for="newsletter1" class="visually-hidden">E-posta adresi</label>
-                        <input id="newsletter1" type="text" class="form-control" placeholder="E-posta adresi">
-                        <button class="btn btn-success" type="button">Abone</button>
+                        <input id="newsletter1" name="email" type="email" class="form-control" placeholder="E-posta adresi" required>
+                        <button class="btn btn-success" type="submit">Abone</button>
                     </div>
                 </form>
             </div>
@@ -61,3 +61,38 @@ $productTypes = $typesQuery->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </footer>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const newsletterStatus = urlParams.get('newsletter');
+
+    if (newsletterStatus) {
+        let message = '';
+        switch(newsletterStatus) {
+            case 'ok':
+                message = 'Tebrikler! Bültene başarıyla abone oldunuz.';
+                break;
+            case 'exists':
+                message = 'Bu e-posta zaten abone listemizde mevcut.';
+                break;
+            case 'invalid':
+                message = 'Lütfen geçerli bir e-posta adresi giriniz.';
+                break;
+            default:
+                message = '';
+        }
+
+        if (message) {
+            const modalMessage = document.getElementById('feedbackModalMessage');
+            modalMessage.textContent = message;
+
+            // Bootstrap modal açma
+            const feedbackModal = new bootstrap.Modal(document.getElementById('feedbackModal'));
+            feedbackModal.show();
+
+            // URL’den parametreyi temizlemek için
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    }
+});
+</script>

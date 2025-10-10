@@ -20,6 +20,7 @@
     <li><a href="contact.php" class="nav-link">İletişim</a></li>
     <li><a href="gallery.php" class="nav-link">Galeri</a></li>
     <li><a href="documents.php" class="nav-link">Tescil Belgeleri</a></li>
+    <li><a href="newsletter.php" class="nav-link">Bülten Mailleri</a></li>
     <li><a href="user.php" class="nav-link">Kullanıcılar</a></li>
     <li><a href="../logout.php" class="nav-link">Çıkış</a></li>
   </ul>
