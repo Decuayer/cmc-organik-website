@@ -1,6 +1,6 @@
 # CMC Organik Official Website
 
-This repository contains the source code for the official corporate website of **CMC Organik LTD ŞTİ**, a company specializing in sustainable agriculture and organic solutions. The deployed version of this system is actively managed and operational.
+This repository contains the source code for the official corporate website of **CMC Organik LTD ŞTİ**, a company specializing in sustainable agriculture and organic solutions. The initial development phase is complete, and the deployed system is currently fully operational and actively managed.
 
 ## 🌐 Live Website
 
@@ -17,6 +17,24 @@ The website is designed as a comprehensive, dynamic platform with a strong focus
     * **Communication Hub:** Tools for viewing and responding to messages submitted via the contact forms.
 * **Responsive Frontend:** A modern, fully responsive user interface built for easy navigation.
 * **Database Driven:** All dynamic content, including products and contact messages, is managed via a MySQL/SQL database.
+
+---
+
+## 📈 Development Status & Optimization Roadmap
+
+The project is currently transitioning from the initial development phase into a dedicated **Performance Improvement and Optimization Phase**. While the core platform is stable and operational, the focus is now on technical enhancements to maximize speed, scalability, and content delivery efficiency.
+
+### Primary Focus: Asset and Transfer Optimization
+
+The immediate technical priority is enhancing content delivery and administrative performance. Specific areas for improvement include:
+
+* **Accelerated Asset Handling:** Implementing advanced techniques for **image compression and lazy loading** (e.g., utilizing next-gen formats or optimizing existing file structures) to significantly minimize client-side load times.
+* **Optimized Upload Flow:** Streamlining the asset upload process (photos and files) within the Admin Panel to ensure **faster, more reliable concurrent transfers** and improved administrative efficiency.
+* **General Performance Tuning:** Reviewing server-side caching mechanisms and database query efficiency to ensure rapid delivery of both static and dynamic content.
+
+This optimization phase aims to guarantee a faster user experience, especially for global access, and provide a highly responsive management environment for content administrators.
+
+---
 
 ## 💻 Technologies Used
 
