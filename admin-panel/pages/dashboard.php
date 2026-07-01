@@ -94,7 +94,6 @@ $productsWithoutCategory = (int)$pdo->query("
       OR p.type IS NULL
 ")->fetchColumn();
 
-<?php
 // Bakım modu durum kontrolü
 $maintenanceFlag = realpath(__DIR__ . '/../../') . '/maintenance.flag';
 $isMaintenanceActive = file_exists($maintenanceFlag);
