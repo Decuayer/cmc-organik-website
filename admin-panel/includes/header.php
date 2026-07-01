@@ -7,6 +7,7 @@
     <link rel="icon" href="../assets/uploads/logo-white.png" type="image/x-icon">
     <!-- CSS LIBS -->
     <link rel="stylesheet" href="../assets/css/bootstrap.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../assets/css/main.css?v=<?php echo time(); ?>">
 
 </head>

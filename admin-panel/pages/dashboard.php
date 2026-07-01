@@ -1,7 +1,5 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+require_once __DIR__ . '/../../config/env.php';
 
 require_once '../includes/auth.php';
 require_once '../../config/database.php';
@@ -102,7 +100,7 @@ $isMaintenanceActive = file_exists($maintenanceFlag);
 
     <?php if ($isMaintenanceActive): ?>
     <div class="alert alert-danger d-flex align-items-center gap-3 mb-4" role="alert">
-        <span style="font-size:1.8rem;">🔴</span>
+        <i class="bi bi-exclamation-triangle-fill" style="font-size:1.8rem;"></i>
         <div>
             <strong>Bakım Modu Aktif!</strong> Site ziyaretçileri bakım sayfasını görüyor.
             <a href="maintenance.php" class="btn btn-sm btn-danger ms-3">Yönet →</a>
@@ -110,7 +108,7 @@ $isMaintenanceActive = file_exists($maintenanceFlag);
     </div>
     <?php else: ?>
     <div class="alert alert-success d-flex align-items-center gap-3 mb-4" role="alert" style="padding: 8px 16px;">
-        <span>🟢</span>
+        <i class="bi bi-check-circle-fill"></i>
         <div class="d-flex align-items-center justify-content-between w-100">
             <small><strong>Site Çalışıyor</strong> — Ziyaretçiler siteye erişebiliyor.</small>
             <a href="maintenance.php" class="btn btn-sm btn-outline-success">Bakım Modu →</a>
@@ -122,7 +120,7 @@ $isMaintenanceActive = file_exists($maintenanceFlag);
         <img src="../assets/uploads/logo-white.png" alt="Logo" style="height: 50px; max-height: 100%;" class="me-3">
         <div>
             <h2 class="m-0">Kontrol Paneli</h2>
-            <p class="text-muted mb-0">Hoş geldiniz, <?= htmlspecialchars($_SESSION['admin_username'] ?? 'Admin') ?> 👋</p>
+            <p class="text-muted mb-0">Hoş geldiniz, <?= htmlspecialchars($_SESSION['admin_username'] ?? 'Admin') ?></p>
         </div>
     </div>
 

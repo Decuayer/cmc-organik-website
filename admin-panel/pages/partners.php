@@ -1,7 +1,5 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+require_once __DIR__ . '/../../config/env.php';
 
 require_once '../includes/auth.php';
 require_once '../../config/database.php';
@@ -52,7 +50,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'add') {
         if (!$error) {
             $stmt = $pdo->prepare("INSERT INTO business_partners (name, description, image_path, logo_path, sort_order, is_active) VALUES (?, ?, ?, ?, ?, 1)");
             $stmt->execute([$name, $description, $image_path, $logo_path, $sort_order]);
-            $success = "✅ \"$name\" başarıyla eklendi.";
+            $success = "\"$name\" başarıyla eklendi.";
         }
     }
 }
@@ -96,7 +94,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'edit') {
 
         $stmt = $pdo->prepare("UPDATE business_partners SET name=?, description=?, image_path=?, logo_path=?, sort_order=?, is_active=? WHERE id=?");
         $stmt->execute([$name, $description, $image_path, $logo_path, $sort_order, $is_active, $id]);
-        $success = "✅ \"$name\" güncellendi.";
+        $success = "\"$name\" güncellendi.";
     }
 }
 
@@ -113,7 +111,7 @@ if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
             }
         }
         $pdo->prepare("DELETE FROM business_partners WHERE id = ?")->execute([$id]);
-        $success = "✅ İş ortağı silindi.";
+        $success = "İş ortağı silindi.";
     }
 }
 
@@ -140,20 +138,20 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
 <div class="content" id="content" style="padding: 20px;">
     <div class="d-flex align-items-center mb-4">
         <div>
-            <h4 class="m-0">🤝 İş Ortakları Yönetimi</h4>
+            <h4 class="m-0"><i class="bi bi-people me-1"></i> İş Ortakları Yönetimi</h4>
             <p class="text-muted mb-0">İş ortaklarını ekleyin, düzenleyin, silin ve sıralayın.</p>
         </div>
     </div>
 
     <?php if ($success): ?>
         <div class="alert alert-success alert-dismissible fade show">
-            <?= htmlspecialchars($success) ?>
+            <i class="bi bi-check-circle-fill me-1"></i><?= htmlspecialchars($success) ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     <?php endif; ?>
     <?php if ($error): ?>
         <div class="alert alert-danger alert-dismissible fade show">
-            <?= htmlspecialchars($error) ?>
+            <i class="bi bi-x-circle-fill me-1"></i><?= htmlspecialchars($error) ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     <?php endif; ?>
@@ -163,7 +161,7 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
         <div class="col-lg-5">
             <div class="card shadow-sm">
                 <div class="card-header bg-success text-white">
-                    <?= $editPartner ? '✏️ İş Ortağını Düzenle' : '➕ Yeni İş Ortağı Ekle' ?>
+                    <?= $editPartner ? '<i class="bi bi-pencil-square me-1"></i> İş Ortağını Düzenle' : '<i class="bi bi-plus-lg me-1"></i> Yeni İş Ortağı Ekle' ?>
                 </div>
                 <div class="card-body">
                     <form method="POST" enctype="multipart/form-data">
@@ -230,7 +228,7 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
 
                         <div class="d-flex gap-2">
                             <button type="submit" class="btn btn-success">
-                                <?= $editPartner ? '💾 Güncelle' : '➕ Ekle' ?>
+                                <?= $editPartner ? '<i class="bi bi-save me-1"></i> Güncelle' : '<i class="bi bi-plus-lg me-1"></i> Ekle' ?>
                             </button>
                             <?php if ($editPartner): ?>
                                 <a href="partners.php" class="btn btn-outline-secondary">İptal</a>
@@ -245,7 +243,7 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
         <div class="col-lg-7">
             <div class="card shadow-sm">
                 <div class="card-header bg-light d-flex justify-content-between align-items-center">
-                    <strong>📋 İş Ortakları Listesi</strong>
+                    <strong><i class="bi bi-list-ul me-1"></i> İş Ortakları Listesi</strong>
                     <span class="badge bg-secondary"><?= count($partners) ?> ortak</span>
                 </div>
                 <div class="card-body p-0">
@@ -272,7 +270,7 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
                                                     <img src="/<?= htmlspecialchars($p['image_path']) ?>"
                                                          class="img-thumbnail" style="max-height:45px; max-width:55px;" alt="">
                                                 <?php else: ?>
-                                                    <span class="text-muted" style="font-size:1.5rem;">🤝</span>
+                                                    <i class="bi bi-people text-muted" style="font-size:1.5rem;"></i>
                                                 <?php endif; ?>
                                             </td>
                                             <td>
@@ -290,15 +288,15 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
                                                 <a href="partners.php?toggle=<?= $p['id'] ?>"
                                                    class="badge <?= $p['is_active'] ? 'bg-success' : 'bg-secondary' ?> text-decoration-none"
                                                    title="Durumu değiştir">
-                                                    <?= $p['is_active'] ? '✅ Aktif' : '⛔ Pasif' ?>
+                                                    <?= $p['is_active'] ? '<i class="bi bi-check-circle-fill me-1"></i>Aktif' : '<i class="bi bi-slash-circle me-1"></i>Pasif' ?>
                                                 </a>
                                             </td>
                                             <td>
-                                                <a href="partners.php?edit=<?= $p['id'] ?>" class="btn btn-sm btn-outline-primary me-1" title="Düzenle">✏️</a>
+                                                <a href="partners.php?edit=<?= $p['id'] ?>" class="btn btn-sm btn-outline-success me-1" title="Düzenle"><i class="bi bi-pencil-square"></i></a>
                                                 <a href="partners.php?delete=<?= $p['id'] ?>"
                                                    class="btn btn-sm btn-outline-danger"
                                                    title="Sil"
-                                                   onclick="return confirm('<?= htmlspecialchars($p['name']) ?> silinsin mi? Bu işlem geri alınamaz.')">🗑️</a>
+                                                   onclick="return confirm('<?= htmlspecialchars($p['name']) ?> silinsin mi? Bu işlem geri alınamaz.')"><i class="bi bi-trash"></i></a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -318,7 +316,7 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
             <div class="card shadow-sm mt-3">
                 <div class="card-body py-2">
                     <small class="text-muted">
-                        💡 <strong>İpuçları:</strong>
+                        <i class="bi bi-lightbulb me-1"></i> <strong>İpuçları:</strong>
                         Sıralama numarası küçük olan ortak sayfada önce görünür.
                         Pasif ortaklar sitede gösterilmez ama silinmez.
                         Detay görseli iş ortakları sayfasında ortağın yanında büyük görünür.

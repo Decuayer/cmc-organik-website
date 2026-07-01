@@ -1,7 +1,5 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+require_once __DIR__ . '/../../config/env.php';
 
 require_once '../includes/auth.php';
 require_once '../../config/database.php';
@@ -68,7 +66,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'update_homepage') {
     setContent($pdo, 'homepage_roadmap', 'slogan', trim($_POST['hp_roadmap_slogan'] ?? ''));
     setContent($pdo, 'homepage_roadmap', 'description', trim($_POST['hp_roadmap_desc'] ?? ''));
 
-    if (!$error) $success = '✅ Anasayfa içerikleri güncellendi.';
+    if (!$error) $success = 'Anasayfa içerikleri güncellendi.';
 }
 
 // =============================
@@ -80,9 +78,9 @@ if (isset($_POST['action']) && $_POST['action'] === 'add_roadmap_item') {
     if ($title) {
         $pdo->prepare("INSERT INTO roadmap_items (title, description, icon_id, sort_order) VALUES (?, ?, ?, ?)")
             ->execute([$title, trim($_POST['ri_desc'] ?? ''), trim($_POST['ri_icon'] ?? 'gear-fill'), (int)($_POST['ri_sort'] ?? 0)]);
-        $success = '✅ Roadmap maddesi eklendi.';
+        $success = 'Roadmap maddesi eklendi.';
     } else {
-        $error = '❌ Başlık boş olamaz.';
+        $error = 'Başlık boş olamaz.';
     }
 }
 
@@ -99,14 +97,14 @@ if (isset($_POST['action']) && $_POST['action'] === 'edit_roadmap_item') {
                 isset($_POST['ri_active']) ? 1 : 0,
                 $id
             ]);
-        $success = '✅ Roadmap maddesi güncellendi.';
+        $success = 'Roadmap maddesi güncellendi.';
     }
 }
 
 if (isset($_GET['delete_ri']) && is_numeric($_GET['delete_ri'])) {
     $activeTab = 'roadmap';
     $pdo->prepare("DELETE FROM roadmap_items WHERE id = ?")->execute([(int)$_GET['delete_ri']]);
-    $success = '✅ Roadmap maddesi silindi.';
+    $success = 'Roadmap maddesi silindi.';
     header("Location: content_manager.php?tab=roadmap");
     exit;
 }
@@ -151,7 +149,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'update_about') {
     setContent($pdo, 'about_bottom', 'paragraph3', trim($_POST['ab_bottom_p3'] ?? ''));
     setContent($pdo, 'about_bottom', 'paragraph4', trim($_POST['ab_bottom_p4'] ?? ''));
 
-    if (!$error) $success = '✅ Hakkımızda sayfası içerikleri güncellendi.';
+    if (!$error) $success = 'Hakkımızda sayfası içerikleri güncellendi.';
 }
 
 // ---- Roadmap maddelerini çek ----
@@ -166,38 +164,38 @@ if (isset($_GET['edit_ri']) && is_numeric($_GET['edit_ri'])) {
 
 // SVG sprite ikon listesi (mevcut svg.php'den)
 $availableIcons = [
-    'gear-fill' => '⚙️ gear-fill',
-    'recycle' => '♻️ recycle',
-    'book' => '📖 book',
-    'speedometer' => '🏎️ speedometer',
-    'star' => '⭐ star',
-    'shield' => '🛡️ shield',
-    'leaf' => '🌿 leaf',
-    'globe' => '🌍 globe',
-    'graph-up' => '📈 graph-up',
-    'people' => '👥 people',
-    'check-circle' => '✅ check-circle',
-    'lightbulb' => '💡 lightbulb',
+    'gear-fill' => 'Dişli (gear-fill)',
+    'recycle' => 'Geri dönüşüm (recycle)',
+    'book' => 'Kitap (book)',
+    'speedometer' => 'Hız göstergesi (speedometer)',
+    'star' => 'Yıldız (star)',
+    'shield' => 'Kalkan (shield)',
+    'leaf' => 'Yaprak (leaf)',
+    'globe' => 'Küre (globe)',
+    'graph-up' => 'Yükselen grafik (graph-up)',
+    'people' => 'İnsanlar (people)',
+    'check-circle' => 'Onay işareti (check-circle)',
+    'lightbulb' => 'Ampul (lightbulb)',
 ];
 ?>
 
 <div class="content" id="content" style="padding: 20px;">
     <div class="d-flex align-items-center mb-4">
         <div>
-            <h4 class="m-0">✏️ İçerik Yönetimi</h4>
+            <h4 class="m-0"><i class="bi bi-pencil-square me-1"></i> İçerik Yönetimi</h4>
             <p class="text-muted mb-0">Anasayfa ve Hakkımızda sayfalarının metinlerini ve görsellerini yönetin.</p>
         </div>
     </div>
 
     <?php if ($success): ?>
         <div class="alert alert-success alert-dismissible fade show">
-            <?= htmlspecialchars($success) ?>
+            <i class="bi bi-check-circle-fill me-1"></i><?= htmlspecialchars($success) ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     <?php endif; ?>
     <?php if ($error): ?>
         <div class="alert alert-danger alert-dismissible fade show">
-            <?= nl2br(htmlspecialchars(trim($error))) ?>
+            <i class="bi bi-x-circle-fill me-1"></i><?= nl2br(htmlspecialchars(trim($error))) ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     <?php endif; ?>
@@ -205,13 +203,13 @@ $availableIcons = [
     <!-- Sekmeler -->
     <ul class="nav nav-tabs mb-4" id="contentTabs">
         <li class="nav-item">
-            <a class="nav-link <?= $activeTab === 'homepage' ? 'active' : '' ?>" href="?tab=homepage">🏠 Anasayfa</a>
+            <a class="nav-link text-success <?= $activeTab === 'homepage' ? 'active' : '' ?>" href="?tab=homepage"><i class="bi bi-house me-1"></i> Anasayfa</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link <?= $activeTab === 'roadmap' ? 'active' : '' ?>" href="?tab=roadmap">🗺️ Yol Haritası</a>
+            <a class="nav-link text-success <?= $activeTab === 'roadmap' ? 'active' : '' ?>" href="?tab=roadmap"><i class="bi bi-map me-1"></i> Yol Haritası</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link <?= $activeTab === 'about' ? 'active' : '' ?>" href="?tab=about">ℹ️ Hakkımızda</a>
+            <a class="nav-link text-success <?= $activeTab === 'about' ? 'active' : '' ?>" href="?tab=about"><i class="bi bi-info-circle me-1"></i> Hakkımızda</a>
         </li>
     </ul>
 
@@ -223,7 +221,7 @@ $availableIcons = [
 
         <!-- Misyon -->
         <div class="card shadow-sm mb-4">
-            <div class="card-header bg-success text-white"><strong>🎯 Misyonumuz (Anasayfa)</strong></div>
+            <div class="card-header bg-success text-white"><strong><i class="bi bi-bullseye me-1"></i> Misyonumuz (Anasayfa)</strong></div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-8">
@@ -253,7 +251,7 @@ $availableIcons = [
 
         <!-- Vizyon -->
         <div class="card shadow-sm mb-4">
-            <div class="card-header bg-success text-white"><strong>🔭 Vizyonumuz (Anasayfa)</strong></div>
+            <div class="card-header bg-success text-white"><strong><i class="bi bi-binoculars me-1"></i> Vizyonumuz (Anasayfa)</strong></div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-8">
@@ -283,7 +281,7 @@ $availableIcons = [
 
         <!-- Yol Haritası Ana Yazı -->
         <div class="card shadow-sm mb-4">
-            <div class="card-header bg-success text-white"><strong>🗺️ Yol Haritamız – Ana Yazı</strong></div>
+            <div class="card-header bg-success text-white"><strong><i class="bi bi-map me-1"></i> Yol Haritamız – Ana Yazı</strong></div>
             <div class="card-body">
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Slogan</label>
@@ -297,7 +295,7 @@ $availableIcons = [
             </div>
         </div>
 
-        <button type="submit" class="btn btn-success btn-lg">💾 Anasayfa İçeriklerini Kaydet</button>
+        <button type="submit" class="btn btn-success btn-lg"><i class="bi bi-save me-1"></i> Anasayfa İçeriklerini Kaydet</button>
     </form>
     <?php endif; ?>
 
@@ -307,7 +305,7 @@ $availableIcons = [
         <div class="col-lg-5">
             <div class="card shadow-sm">
                 <div class="card-header bg-success text-white">
-                    <?= $editRi ? '✏️ Maddeyi Düzenle' : '➕ Yeni Madde Ekle' ?>
+                    <?= $editRi ? '<i class="bi bi-pencil-square me-1"></i> Maddeyi Düzenle' : '<i class="bi bi-plus-lg me-1"></i> Yeni Madde Ekle' ?>
                 </div>
                 <div class="card-body">
                     <form method="POST">
@@ -356,7 +354,7 @@ $availableIcons = [
                             <?php endif; ?>
                         </div>
                         <div class="d-flex gap-2">
-                            <button type="submit" class="btn btn-success"><?= $editRi ? '💾 Güncelle' : '➕ Ekle' ?></button>
+                            <button type="submit" class="btn btn-success"><?= $editRi ? '<i class="bi bi-save me-1"></i> Güncelle' : '<i class="bi bi-plus-lg me-1"></i> Ekle' ?></button>
                             <?php if ($editRi): ?><a href="?tab=roadmap" class="btn btn-outline-secondary">İptal</a><?php endif; ?>
                         </div>
                     </form>
@@ -367,7 +365,7 @@ $availableIcons = [
         <div class="col-lg-7">
             <div class="card shadow-sm">
                 <div class="card-header bg-light d-flex justify-content-between align-items-center">
-                    <strong>📋 Yol Haritası Maddeleri</strong>
+                    <strong><i class="bi bi-list-ul me-1"></i> Yol Haritası Maddeleri</strong>
                     <span class="badge bg-secondary"><?= count($roadmapItems) ?> madde</span>
                 </div>
                 <div class="card-body p-0">
@@ -401,10 +399,10 @@ $availableIcons = [
                                             </span>
                                         </td>
                                         <td>
-                                            <a href="?edit_ri=<?= $ri['id'] ?>" class="btn btn-sm btn-outline-primary me-1">✏️</a>
+                                            <a href="?edit_ri=<?= $ri['id'] ?>" class="btn btn-sm btn-outline-success me-1"><i class="bi bi-pencil-square"></i></a>
                                             <a href="?delete_ri=<?= $ri['id'] ?>"
                                                class="btn btn-sm btn-outline-danger"
-                                               onclick="return confirm('Bu maddeyi silmek istediğinize emin misiniz?')">🗑️</a>
+                                               onclick="return confirm('Bu maddeyi silmek istediğinize emin misiniz?')"><i class="bi bi-trash"></i></a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -427,7 +425,7 @@ $availableIcons = [
 
         <!-- Hoşgeldiniz -->
         <div class="card shadow-sm mb-4">
-            <div class="card-header bg-success text-white"><strong>👋 CMC Organik'e Hoş Geldiniz</strong></div>
+            <div class="card-header bg-success text-white"><strong><i class="bi bi-hand-thumbs-up me-1"></i> CMC Organik'e Hoş Geldiniz</strong></div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-8">
@@ -455,7 +453,7 @@ $availableIcons = [
 
         <!-- Misyon (Hakkımızda) -->
         <div class="card shadow-sm mb-4">
-            <div class="card-header bg-success text-white"><strong>🎯 Misyonumuz (Hakkımızda Sayfası)</strong></div>
+            <div class="card-header bg-success text-white"><strong><i class="bi bi-bullseye me-1"></i> Misyonumuz (Hakkımızda Sayfası)</strong></div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-8">
@@ -483,7 +481,7 @@ $availableIcons = [
 
         <!-- Vizyon (Hakkımızda) -->
         <div class="card shadow-sm mb-4">
-            <div class="card-header bg-success text-white"><strong>🔭 Vizyonumuz (Hakkımızda Sayfası)</strong></div>
+            <div class="card-header bg-success text-white"><strong><i class="bi bi-binoculars me-1"></i> Vizyonumuz (Hakkımızda Sayfası)</strong></div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-8">
@@ -511,7 +509,7 @@ $availableIcons = [
 
         <!-- Alt Bölüm -->
         <div class="card shadow-sm mb-4">
-            <div class="card-header bg-success text-white"><strong>📝 Alt Bölüm: "Tarımda Güvenin ve Kalitenin Adresi"</strong></div>
+            <div class="card-header bg-success text-white"><strong><i class="bi bi-file-text me-1"></i> Alt Bölüm: "Tarımda Güvenin ve Kalitenin Adresi"</strong></div>
             <div class="card-body">
                 <div class="mb-3">
                     <label class="form-label fw-semibold">Başlık</label>
@@ -527,7 +525,7 @@ $availableIcons = [
             </div>
         </div>
 
-        <button type="submit" class="btn btn-success btn-lg">💾 Hakkımızda İçeriklerini Kaydet</button>
+        <button type="submit" class="btn btn-success btn-lg"><i class="bi bi-save me-1"></i> Hakkımızda İçeriklerini Kaydet</button>
     </form>
     <?php endif; ?>
 </div>

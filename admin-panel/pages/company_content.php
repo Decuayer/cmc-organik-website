@@ -1,7 +1,5 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+require_once __DIR__ . '/../../config/env.php';
 
 require_once '../includes/auth.php';
 require_once '../../config/database.php';
@@ -34,7 +32,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'update_text') {
     setContent($pdo, 'company', 'paragraph1', trim($_POST['paragraph1'] ?? ''));
     setContent($pdo, 'company', 'paragraph2', trim($_POST['paragraph2'] ?? ''));
     setContent($pdo, 'company', 'paragraph3', trim($_POST['paragraph3'] ?? ''));
-    $success = '✅ Şirket yazısı güncellendi.';
+    $success = 'Şirket yazısı güncellendi.';
 }
 
 // ---- Fotoğraf Yükle ----
@@ -46,15 +44,15 @@ if (isset($_POST['action']) && $_POST['action'] === 'upload_photo') {
             $filename = uniqid('cinfo_', true) . '.' . $ext;
             $dest = $cinfoDir . $filename;
             if (move_uploaded_file($file['tmp_name'], $dest)) {
-                $success = "✅ Fotoğraf yüklendi: $filename";
+                $success = "Fotoğraf yüklendi: $filename";
             } else {
-                $error = '❌ Fotoğraf yüklenemedi. Dizin izinlerini kontrol edin.';
+                $error = 'Fotoğraf yüklenemedi. Dizin izinlerini kontrol edin.';
             }
         } else {
-            $error = '❌ Geçersiz dosya tipi. JPG, JPEG, PNG, GIF, WEBP kabul edilir.';
+            $error = 'Geçersiz dosya tipi. JPG, JPEG, PNG, GIF, WEBP kabul edilir.';
         }
     } else {
-        $error = '❌ Lütfen bir fotoğraf seçin.';
+        $error = 'Lütfen bir fotoğraf seçin.';
     }
 }
 
@@ -64,12 +62,12 @@ if (isset($_GET['delete_photo'])) {
     $fullPath = $cinfoDir . $filename;
     if (file_exists($fullPath) && is_file($fullPath)) {
         if (unlink($fullPath)) {
-            $success = '✅ Fotoğraf silindi.';
+            $success = 'Fotoğraf silindi.';
         } else {
-            $error = '❌ Fotoğraf silinemedi. İzinleri kontrol edin.';
+            $error = 'Fotoğraf silinemedi. İzinleri kontrol edin.';
         }
     } else {
-        $error = '❌ Dosya bulunamadı.';
+        $error = 'Dosya bulunamadı.';
     }
 }
 
@@ -95,20 +93,20 @@ $para3 = getContent($pdo, 'company', 'paragraph3', '');
 <div class="content" id="content" style="padding: 20px;">
     <div class="d-flex align-items-center mb-4">
         <div>
-            <h4 class="m-0">🏢 Şirketimiz Sayfası Yönetimi</h4>
+            <h4 class="m-0"><i class="bi bi-building me-1"></i> Şirketimiz Sayfası Yönetimi</h4>
             <p class="text-muted mb-0">Şirket tanıtım yazısını ve fotoğraf galerisini yönetin.</p>
         </div>
     </div>
 
     <?php if ($success): ?>
         <div class="alert alert-success alert-dismissible fade show">
-            <?= htmlspecialchars($success) ?>
+            <i class="bi bi-check-circle-fill me-1"></i><?= htmlspecialchars($success) ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     <?php endif; ?>
     <?php if ($error): ?>
         <div class="alert alert-danger alert-dismissible fade show">
-            <?= htmlspecialchars($error) ?>
+            <i class="bi bi-x-circle-fill me-1"></i><?= htmlspecialchars($error) ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     <?php endif; ?>
@@ -116,7 +114,7 @@ $para3 = getContent($pdo, 'company', 'paragraph3', '');
     <!-- Yazı Yönetimi -->
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-success text-white">
-            <strong>✏️ Şirket Tanıtım Yazısı</strong>
+            <strong><i class="bi bi-pencil-square me-1"></i> Şirket Tanıtım Yazısı</strong>
         </div>
         <div class="card-body">
             <form method="POST">
@@ -143,7 +141,7 @@ $para3 = getContent($pdo, 'company', 'paragraph3', '');
                     <textarea name="paragraph3" class="form-control" rows="4"><?= htmlspecialchars($para3) ?></textarea>
                 </div>
 
-                <button type="submit" class="btn btn-success">💾 Yazıları Kaydet</button>
+                <button type="submit" class="btn btn-success"><i class="bi bi-save me-1"></i> Yazıları Kaydet</button>
             </form>
         </div>
     </div>
@@ -151,7 +149,7 @@ $para3 = getContent($pdo, 'company', 'paragraph3', '');
     <!-- Fotoğraf Yükleme -->
     <div class="card shadow-sm mb-4">
         <div class="card-header bg-success text-white">
-            <strong>📸 Fotoğraf Yükle</strong>
+            <strong><i class="bi bi-camera me-1"></i> Fotoğraf Yükle</strong>
         </div>
         <div class="card-body">
             <form method="POST" enctype="multipart/form-data">
@@ -162,7 +160,7 @@ $para3 = getContent($pdo, 'company', 'paragraph3', '');
                         <input type="file" name="photo" class="form-control" accept="image/*" required>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <button type="submit" class="btn btn-success w-100">📤 Yükle</button>
+                        <button type="submit" class="btn btn-success w-100"><i class="bi bi-upload me-1"></i> Yükle</button>
                     </div>
                 </div>
             </form>
@@ -172,7 +170,7 @@ $para3 = getContent($pdo, 'company', 'paragraph3', '');
     <!-- Fotoğraf Galerisi -->
     <div class="card shadow-sm">
         <div class="card-header bg-light d-flex justify-content-between align-items-center">
-            <strong>🖼️ Şirketimiz Fotoğrafları</strong>
+            <strong><i class="bi bi-images me-1"></i> Şirketimiz Fotoğrafları</strong>
             <span class="badge bg-secondary"><?= count($photos) ?> fotoğraf</span>
         </div>
         <div class="card-body">
@@ -192,7 +190,7 @@ $para3 = getContent($pdo, 'company', 'paragraph3', '');
                                     <a href="company_content.php?delete_photo=<?= urlencode($photo) ?>"
                                        class="btn btn-sm btn-outline-danger mt-1"
                                        onclick="return confirm('Bu fotoğrafı silmek istediğinize emin misiniz?')">
-                                        🗑️ Sil
+                                        <i class="bi bi-trash me-1"></i> Sil
                                     </a>
                                 </div>
                             </div>
@@ -210,7 +208,7 @@ $para3 = getContent($pdo, 'company', 'paragraph3', '');
     <div class="card shadow-sm mt-3">
         <div class="card-body py-2">
             <small class="text-muted">
-                💡 Yüklenen fotoğraflar <code>public/img/cinfo/</code> klasörüne kaydedilir ve Şirketimiz sayfasındaki carousel'de otomatik olarak görüntülenir.
+                <i class="bi bi-lightbulb me-1"></i> Yüklenen fotoğraflar <code>public/img/cinfo/</code> klasörüne kaydedilir ve Şirketimiz sayfasındaki carousel'de otomatik olarak görüntülenir.
             </small>
         </div>
     </div>

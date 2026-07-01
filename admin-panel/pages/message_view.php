@@ -1,7 +1,5 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+require_once __DIR__ . '/../../config/env.php';
 
 require_once '../includes/auth.php';
 require_once '../../config/database.php';
@@ -71,13 +69,13 @@ if ($hasIsRead && !$msg['is_read'] && $currentAdminId) {
             <div class="mt-4">
                 <?php if ($hasIsRead): ?>
                     <?php if (!$msg['is_read']): ?>
-                        <a href="contact.php?action=mark_read&id=<?= $msg['id'] ?>" class="btn btn-primary">Okundu Yap</a>
+                        <a href="contact.php?action=mark_read&id=<?= $msg['id'] ?>" class="btn btn-success">Okundu Yap</a>
                     <?php else: ?>
-                        <a href="contact.php?action=mark_unread&id=<?= $msg['id'] ?>" class="btn btn-warning">Okunmadı Yap</a>
+                        <a href="contact.php?action=mark_unread&id=<?= $msg['id'] ?>" class="btn btn-outline-secondary">Okunmadı Yap</a>
                     <?php endif; ?>
 
                     <?php if ($msg['folder'] !== 'important'): ?>
-                        <a href="contact.php?action=move_important&id=<?= $msg['id'] ?>" class="btn btn-info">Önemli</a>
+                        <a href="contact.php?action=move_important&id=<?= $msg['id'] ?>" class="btn btn-outline-success">Önemli</a>
                     <?php else: ?>
                         <a href="contact.php?action=move_inbox&id=<?= $msg['id'] ?>" class="btn btn-secondary">Önemli Kaldır</a>
                     <?php endif; ?>

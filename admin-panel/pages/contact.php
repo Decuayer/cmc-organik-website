@@ -1,7 +1,5 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+require_once __DIR__ . '/../../config/env.php';
 
 require_once '../includes/auth.php';
 require_once '../../config/database.php';
@@ -231,10 +229,10 @@ document.addEventListener('DOMContentLoaded', function () {
         <h4 class="m-0">Gönderilen Mesajlar</h4>
         <div>
             <a href="contact.php?filter=inbox" class="btn btn-outline-secondary btn-sm <?= $filter==='inbox'?'active':'' ?>">Gelen (<?= $counts['inbox'] ?>)</a>
-            <a href="contact.php?filter=unread" class="btn btn-outline-warning btn-sm <?= $filter==='unread'?'active':'' ?>">Yeni (<?= $counts['unread'] ?>)</a>
-            <a href="contact.php?filter=important" class="btn btn-outline-primary btn-sm <?= $filter==='important'?'active':'' ?>">Önemli (<?= $counts['important'] ?>)</a>
+            <a href="contact.php?filter=unread" class="btn btn-outline-success btn-sm <?= $filter==='unread'?'active':'' ?>">Yeni (<?= $counts['unread'] ?>)</a>
+            <a href="contact.php?filter=important" class="btn btn-outline-success btn-sm <?= $filter==='important'?'active':'' ?>">Önemli (<?= $counts['important'] ?>)</a>
             <a href="contact.php?filter=trash" class="btn btn-outline-danger btn-sm <?= $filter==='trash'?'active':'' ?>">Çöp (<?= $counts['trash'] ?>)</a>
-            <a href="contact.php?filter=all" class="btn btn-outline-info btn-sm <?= $filter==='all'?'active':'' ?>">Hepsi (<?= $counts['all'] ?>)</a>
+            <a href="contact.php?filter=all" class="btn btn-outline-secondary btn-sm <?= $filter==='all'?'active':'' ?>">Hepsi (<?= $counts['all'] ?>)</a>
         </div>
     </div>
 

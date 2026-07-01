@@ -1,7 +1,5 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+require_once __DIR__ . '/../../config/env.php';
 
 require_once '../includes/auth.php';              // oturum kontrolü
 require_once '../../config/database.php';         // proje kökündeki db (bu dosya $pdo sağlar)
@@ -52,7 +50,7 @@ $subs = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h4 class="m-0">Bülten Aboneleri</h4>
         <div>
-            <a href="newsletter.php?export=csv" class="btn btn-sm btn-outline-primary">CSV Dışa Aktar</a>
+            <a href="newsletter.php?export=csv" class="btn btn-sm btn-outline-success">CSV Dışa Aktar</a>
         </div>
     </div>
 
