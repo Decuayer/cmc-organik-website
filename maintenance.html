@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bakım Çalışması – CMC Organik</title>
+    <link rel="icon" href="public/img/logo-white.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0f2e0f 0%, #1a4a1a 40%, #2d6a2d 100%);
+            color: #fff;
+            overflow: hidden;
+        }
+
+        /* Animated background blobs */
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.25;
+            animation: float 8s ease-in-out infinite alternate;
+        }
+        body::before {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, #4caf50, #1b5e20);
+            top: -150px; left: -150px;
+        }
+        body::after {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, #81c784, #2e7d32);
+            bottom: -120px; right: -120px;
+            animation-delay: -4s;
+        }
+        @keyframes float {
+            from { transform: translate(0, 0) scale(1); }
+            to   { transform: translate(40px, 30px) scale(1.08); }
+        }
+
+        .card {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            padding: 56px 48px;
+            max-width: 520px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+            animation: fadeUp 0.8s ease both;
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo-wrap {
+            margin-bottom: 32px;
+        }
+        .logo-wrap img {
+            height: 64px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
+        }
+
+        .icon {
+            font-size: 56px;
+            margin-bottom: 20px;
+            display: block;
+            animation: spin 4s linear infinite;
+        }
+        @keyframes spin {
+            0%   { transform: rotate(0deg); }
+            25%  { transform: rotate(15deg); }
+            75%  { transform: rotate(-15deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        p {
+            font-size: 1rem;
+            font-weight: 300;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 36px;
+        }
+
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #4caf50, #81c784);
+            border-radius: 2px;
+            margin: 0 auto 36px;
+        }
+
+        .contact-box {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px;
+            padding: 20px 24px;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.75);
+        }
+        .contact-box a {
+            color: #81c784;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .contact-box a:hover { text-decoration: underline; }
+
+        .badge {
+            display: inline-block;
+            margin-top: 28px;
+            padding: 6px 16px;
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid rgba(76, 175, 80, 0.4);
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: #a5d6a7;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="logo-wrap">
+            <img src="public/img/logo-white.png" alt="CMC Organik Logo">
+        </div>
+
+        <span class="icon">🔧</span>
+
+        <h1>Bakım Çalışması</h1>
+        <div class="divider"></div>
+
+        <p>
+            Sitemiz şu anda bakım çalışması nedeniyle geçici olarak hizmet dışındadır.<br>
+            En kısa sürede tekrar hizmetinizde olmaktan mutluluk duyacağız.
+        </p>
+
+        <div class="contact-box">
+            Acil iletişim için:<br>
+            <a href="mailto:info@cmcorganik.com">info@cmcorganik.com</a>
+        </div>
+
+        <div class="badge">⏳ Yakında Geri Döneceğiz</div>
+    </div>
+</body>
+</html>

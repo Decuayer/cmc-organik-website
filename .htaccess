@@ -1,1 +1,27 @@
 DirectoryIndex index.php
+
+# ============================================================
+# BAKIM MODU — maintenance.flag dosyası varsa aktif olur
+# Admin panel bu dosyayı oluşturur/siler (elle müdahale gerekmez)
+# ============================================================
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Admin paneline her zaman erişime izin ver (bakım modundan muaf)
+    RewriteCond %{REQUEST_URI} ^/admin-panel [NC]
+    RewriteRule ^ - [L]
+
+    # maintenance.html ve maintenance.flag dosyalarına erişime izin ver
+    RewriteCond %{REQUEST_URI} ^/maintenance\.(html|flag)$ [NC]
+    RewriteRule ^ - [L]
+
+    # Statik dosyalara (resim, css, js, font) izin ver — bakım sayfasının görünmesi için
+    RewriteCond %{REQUEST_URI} \.(css|js|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$ [NC]
+    RewriteRule ^ - [L]
+
+    # maintenance.flag dosyası VARSA → tüm istekleri bakım sayfasına yönlendir
+    RewriteCond %{DOCUMENT_ROOT}/maintenance.flag -f
+    RewriteRule ^ /maintenance.html [R=302,L]
+
+</IfModule>
+# ============================================================

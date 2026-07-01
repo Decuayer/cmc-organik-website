@@ -1,57 +1,100 @@
+<?php
+require_once __DIR__ . '/../../config/database.php';
+
+// İş ortaklarını DB'den çek (aktif, sıralı)
+$partners = $pdo->query("SELECT * FROM business_partners WHERE is_active = 1 ORDER BY sort_order ASC, id ASC")->fetchAll(PDO::FETCH_ASSOC);
+
+// Giriş metinlerini DB'den çek
+function getContent(PDO $pdo, string $section, string $key, string $default = ''): string {
+    $stmt = $pdo->prepare("SELECT field_value FROM site_content WHERE section = ? AND field_key = ?");
+    $stmt->execute([$section, $key]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $row ? (string)$row['field_value'] : $default;
+}
+
+$introTitle = getContent($pdo, 'partners_intro', 'title', 'Gücümüzü Paylaştığımız İş Ortaklarımız');
+$introPara1 = getContent($pdo, 'partners_intro', 'paragraph1', 'Başarımızın temelinde yalnızca kaliteli ürünler değil, güçlü iş birliklerimiz de yer alıyor.');
+$introPara2 = getContent($pdo, 'partners_intro', 'paragraph2', 'Yerli ve uluslararası tedarikçilerimizle gerçekleştirdiğimiz stratejik iş birlikleri sayesinde, üreticilerimize her zaman yüksek kaliteli çözümler sunuyoruz.');
+$introPara3 = getContent($pdo, 'partners_intro', 'paragraph3', 'Bizi tercih eden iş ortaklarımıza teşekkür eder, birlikte büyümeye devam edeceğimizi taahhüt ederiz.');
+?>
+
 <div class="container mt-5">
-    <h2 class="pb-2 bordor-bottom">Hakkımızda</h2>
+    <h2 class="pb-2 border-bottom">İş Ortaklarımız</h2>
     <hr class="featurette-divider">
+
+    <!-- Giriş Yazısı -->
     <div class="row featurette">
-        <div class="col-md-7">
-            <h2 class="featurette-heading fw-normal lh-1">Hefe Fertilizer: Güçlü Ürünlerle Güçlü Topraklar</h2>
-            <p class="lead">
-                Hefe Fertilizer, yüksek kaliteli gübreleriyle modern tarıma sürdürülebilir çözümler sunan köklü bir markadır. Geniş ürün yelpazesi, farklı bitki ve iklim koşullarına uyum sağlar.
-                CMC Organik olarak Hefe ile uzun süredir güçlü bir iş birliği yürütüyoruz. Kaliteli ürünleri ve bizim saha tecrübemiz sayesinde çiftçilere verimli ve sürdürülebilir üretim imkânı sunuyoruz.
-            </p>
-        </div>
-        <div class="col-md-5">
-            <img src="public/img/bussiness/Hefe-1.png" alt="Hefe Fertilizer" class="bd-placeholder-img rounded img-fluid" width="500" height="500">
-        </div>
-    </div>
-    <hr class="featurette-divider">
-    <div class="row featurette">
-        <div class="col-md-7 order-md-2">
-            <h2 class="featurette-heading fw-normal lh-1">Bioris: Bitki Sağlığında Bilimin Gücü</h2>
-            <p class="lead">
-                Bioris, bitki sağlığını destekleyen biyoteknolojik ürünleriyle çevre dostu çözümler sunan öncü bir firmadır. Bitki koruma ve toprak düzenleme alanında güvenilir ürünleriyle tanınır.
-                Uzun yıllardır süren iş birliğimizle, Bioris’in güçlü Ar-Ge altyapısı ve bizim sahadaki uygulama deneyimimiz üreticilere büyük değer katmaktadır.</p>
-        </div>
-        <div class="col-md-5 order-md-1">
-            <img src="public/img/bussiness/cmc.jpg" alt="Bioris" class="bd-placeholder-img rounded img-fluid" width="500" height="500">
+        <div class="col-md-12 text-justify">
+            <h2 class="featurette-heading fw-normal lh-1"><?= htmlspecialchars($introTitle) ?></h2>
+            <?php if ($introPara1): ?>
+                <p class="lead"><?= nl2br(htmlspecialchars($introPara1)) ?></p>
+            <?php endif; ?>
+            <?php if ($introPara2): ?>
+                <p class="lead"><?= nl2br(htmlspecialchars($introPara2)) ?></p>
+            <?php endif; ?>
+            <?php if ($introPara3): ?>
+                <p class="lead"><?= nl2br(htmlspecialchars($introPara3)) ?></p>
+            <?php endif; ?>
         </div>
     </div>
-    <hr class="featurette-divider">
-    <div class="row featurette">
-        <div class="col-md-7">
-            <h2 class="featurette-heading fw-normal lh-1">Ufuk Zirai İlaç: Güvenilir Tarımın Vazgeçilmezi</h2>
-            <p class="lead">
-                Ufuk Zirai İlaç, kaliteli zirai ilaç ve tarım girdileriyle sektörde güvenilirliğini kanıtlamış bir firmadır. Doğru ürün ve uygulama prensibiyle çiftçilere verimli üretim sağlar.
-                CMC Organik olarak yıllardır süregelen ortaklığımız, sahada elde ettiğimiz başarılı sonuçlarla devam ediyor. Birlikte tarımın gelişimine katkı sunmaya devam ediyoruz.
-            </p>
+
+    <?php if (count($partners) > 0): ?>
+        <!-- Her ortak için detay bölümü (alternating layout) -->
+        <?php foreach ($partners as $index => $partner): ?>
+            <hr class="featurette-divider">
+            <?php
+            $isEven = $index % 2 === 0;
+            $textClass = $isEven ? 'col-md-7' : 'col-md-7 order-md-2';
+            $imgClass  = $isEven ? 'col-md-5' : 'col-md-5 order-md-1';
+            ?>
+            <div class="row featurette">
+                <div class="<?= $textClass ?>">
+                    <h2 class="featurette-heading fw-normal lh-1"><?= htmlspecialchars($partner['name']) ?></h2>
+                    <?php if ($partner['description']): ?>
+                        <?php foreach (explode("\n", $partner['description']) as $para): ?>
+                            <?php if (trim($para) !== ''): ?>
+                                <p class="lead"><?= htmlspecialchars(trim($para)) ?></p>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+                <div class="<?= $imgClass ?>">
+                    <?php if ($partner['image_path']): ?>
+                        <img src="/<?= htmlspecialchars($partner['image_path']) ?>"
+                             alt="<?= htmlspecialchars($partner['name']) ?>"
+                             class="bd-placeholder-img rounded img-fluid"
+                             width="500" height="500">
+                    <?php else: ?>
+                        <div class="bg-light rounded d-flex align-items-center justify-content-center" style="height:200px;">
+                            <span style="font-size:4rem;">🤝</span>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        <?php endforeach; ?>
+
+        <!-- Logo Carousel -->
+        <?php
+        $logos = array_filter($partners, fn($p) => !empty($p['logo_path']));
+        if (count($logos) > 0):
+        ?>
+        <hr class="featurette-divider">
+        <div class="row mt-4">
+            <div id="owl-partners" class="owl-carousel owl-theme">
+                <?php foreach ($logos as $partner): ?>
+                    <div class="item" style="width:250px; text-align:center;">
+                        <img src="/<?= htmlspecialchars($partner['logo_path']) ?>"
+                             alt="<?= htmlspecialchars($partner['name']) ?>"
+                             style="max-height:120px; object-fit:contain;">
+                        <p class="mt-1" style="font-size:0.8rem; color:#666;"><?= htmlspecialchars($partner['name']) ?></p>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </div>
-        <div class="col-md-5">
-            <img src="public/img/bussiness/ufuk.png" alt="Ufuk Zirai İlaç" class="bd-placeholder-img rounded img-fluid" width="500" height="500">
-        </div>
-    </div>
-    <hr class="featurette-divider">
-    <div class="row mt-4">
-        <div id="owl-info" class="owl-carousel owl-theme">
-            <div class="item" style="width:250px"><img src="public/img/cinfo/cinfo1.jpg" alt="1"></div>
-            <div class="item" style="width:250px"><img src="public/img/cinfo/cinfo2.jpg" alt="2"></div>
-            <div class="item" style="width:250px"><img src="public/img/cinfo/cinfo3.jpg" alt="3"></div>
-            <div class="item" style="width:250px"><img src="public/img/cinfo/cinfo4.jpg" alt="4"></div>
-            <div class="item" style="width:250px"><img src="public/img/cinfo/cinfo5.jpg" alt="5"></div>
-            <div class="item" style="width:250px"><img src="public/img/cinfo/cinfo6.jpg" alt="6"></div>
-            <div class="item" style="width:250px"><img src="public/img/cinfo/cinfo7.jpg" alt="7"></div>
-            <div class="item" style="width:250px"><img src="public/img/cinfo/cinfo8.jpg" alt="8"></div>
-            <div class="item" style="width:250px"><img src="public/img/cinfo/cinfo9.jpg" alt="9"></div>
-            <div class="item" style="width:250px"><img src="public/img/cinfo/cinfo10.jpg" alt="10"></div>
-            <div class="item" style="width:250px"><img src="public/img/cinfo/cinfo11.jpg" alt="11"></div>
-        </div>  
-    </div>
+        <?php endif; ?>
+
+    <?php else: ?>
+        <hr class="featurette-divider">
+        <div class="alert alert-info">Henüz iş ortağı eklenmemiş.</div>
+    <?php endif; ?>
 </div>
