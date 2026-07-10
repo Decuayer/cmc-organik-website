@@ -25,7 +25,7 @@ if (!$product) {
 }
 
 // Kategoriler
-$types = $pdo->query("SELECT * FROM product_types ORDER BY name ASC")->fetchAll(PDO::FETCH_ASSOC);
+$types = $pdo->query("SELECT * FROM product_types ORDER BY sort_order ASC, idproduct_types ASC")->fetchAll(PDO::FETCH_ASSOC);
 
 // Form submit
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

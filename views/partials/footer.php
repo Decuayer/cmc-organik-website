@@ -3,7 +3,7 @@ require_once __DIR__ . '/../../config/database.php';
 
 $currentPage = basename($_SERVER['PHP_SELF']);
 
-$typesQuery = $pdo->query("SELECT * FROM product_types ORDER BY idproduct_types ASC");
+$typesQuery = $pdo->query("SELECT * FROM product_types ORDER BY sort_order ASC, idproduct_types ASC");
 $productTypes = $typesQuery->fetchAll(PDO::FETCH_ASSOC);
 ?>
 

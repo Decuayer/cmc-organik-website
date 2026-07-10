@@ -35,7 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload_pdf'])) {
 if (isset($_GET['delete'])) {
     $fileToDelete = basename($_GET['delete']); // güvenlik
     $fullPath = $dir . '/' . $fileToDelete;
-    if (file_exists($fullPath)) {
+    if (strtolower(pathinfo($fileToDelete, PATHINFO_EXTENSION)) !== 'pdf') {
+        $error = "Geçersiz dosya.";
+    } elseif (file_exists($fullPath)) {
         if (unlink($fullPath)) {
             $success = "PDF silindi.";
         } else {
@@ -43,6 +45,34 @@ if (isset($_GET['delete'])) {
         }
     } else {
         $error = "PDF bulunamadı.";
+    }
+}
+
+// PDF Yeniden Adlandırma
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['rename_pdf'])) {
+    $oldName = basename($_POST['old_name'] ?? '');
+    $newBase = trim($_POST['new_name'] ?? '');
+    $oldPath = $dir . '/' . $oldName;
+
+    if ($newBase === '') {
+        $error = "Yeni isim boş olamaz.";
+    } elseif (!file_exists($oldPath)) {
+        $error = "PDF bulunamadı.";
+    } else {
+        // Windows/Linux dosya sisteminde sorun çıkarabilecek karakterleri temizle
+        $newBase = preg_replace('/[\/\\\\:*?"<>|]/', '-', $newBase);
+        $newName = basename($newBase) . '.pdf';
+        $newPath = $dir . '/' . $newName;
+
+        if ($newName === $oldName) {
+            $success = "PDF adı değiştirilmedi.";
+        } elseif (file_exists($newPath)) {
+            $error = "Bu isimde bir PDF zaten var.";
+        } elseif (rename($oldPath, $newPath)) {
+            $success = "PDF adı başarıyla değiştirildi.";
+        } else {
+            $error = "PDF adı değiştirilirken bir hata oluştu.";
+        }
     }
 }
 
@@ -90,11 +120,15 @@ $pdfs = glob($dir . '/*.pdf');
                 <div class="col-md-4 mb-4">
                     <div class="card h-100 shadow-sm">
                         <div class="card-body d-flex flex-column justify-content-between">
-                            <h5 class="card-title mb-3"><?= htmlspecialchars($displayName) ?></h5>
+                            <form method="POST" class="input-group input-group-sm mb-3">
+                                <input type="hidden" name="old_name" value="<?= htmlspecialchars($filename) ?>">
+                                <input type="text" name="new_name" class="form-control" value="<?= htmlspecialchars($displayName) ?>" required>
+                                <button type="submit" name="rename_pdf" class="btn btn-outline-success" title="Adı Kaydet">Kaydet</button>
+                            </form>
                             <embed src="<?= htmlspecialchars($fileUrl) ?>" type="application/pdf" width="100%" height="200px" style="border:1px solid #eee; border-radius:4px;" />
                             <div class="mt-2 d-flex justify-content-between">
                                 <a href="<?= htmlspecialchars($fileUrl) ?>" target="_blank" class="btn btn-success btn-sm">PDF'yi Aç</a>
-                                <a href="registration_files.php?delete=<?= urlencode($filename) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Bu PDF dosyasını silmek istediğinize emin misiniz?');">Sil</a>
+                                <a href="documents.php?delete=<?= urlencode($filename) ?>" class="btn btn-danger btn-sm" onclick="return confirm('Bu PDF dosyasını silmek istediğinize emin misiniz?');">Sil</a>
                             </div>
                         </div>
                     </div>
