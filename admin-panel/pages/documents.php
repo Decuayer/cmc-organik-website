@@ -111,13 +111,22 @@ $pdfs = glob($dir . '/*.pdf');
 
     <!-- PDF Listesi -->
     <?php if (count($pdfs) > 0): ?>
-        <div class="row">
-            <?php foreach ($pdfs as $pdf): 
+        <div class="row g-2 mb-3 align-items-center">
+            <div class="col-md-8">
+                <input type="search" id="documentSearch" class="form-control" placeholder="Tescil dosyası adında ara...">
+            </div>
+            <div class="col-md-4 text-md-end text-muted">
+                <span id="resultCount"></span>
+            </div>
+        </div>
+
+        <div class="row" id="documentsGrid">
+            <?php foreach ($pdfs as $pdf):
                 $filename = basename($pdf);
                 $displayName = preg_replace('/\.pdf$/i', '', $filename);
                 $fileUrl = $baseUrl . rawurlencode($filename);
             ?>
-                <div class="col-md-4 mb-4">
+                <div class="col-md-4 mb-4 document-item" data-name="<?= htmlspecialchars(mb_strtolower($displayName)) ?>">
                     <div class="card h-100 shadow-sm">
                         <div class="card-body d-flex flex-column justify-content-between">
                             <form method="POST" class="input-group input-group-sm mb-3">
@@ -135,6 +144,34 @@ $pdfs = glob($dir . '/*.pdf');
                 </div>
             <?php endforeach; ?>
         </div>
+        <div id="noResults" class="alert alert-info d-none">Aramanızla eşleşen tescil dosyası bulunamadı.</div>
+
+        <script>
+        (function () {
+            var searchInput = document.getElementById('documentSearch');
+            var items = Array.prototype.slice.call(document.querySelectorAll('#documentsGrid .document-item'));
+            var resultCount = document.getElementById('resultCount');
+            var noResults = document.getElementById('noResults');
+            var totalCount = items.length;
+
+            function applyFilter() {
+                var query = searchInput.value.trim().toLowerCase();
+                var visibleCount = 0;
+
+                items.forEach(function (item) {
+                    var visible = !query || item.dataset.name.indexOf(query) !== -1;
+                    item.classList.toggle('d-none', !visible);
+                    if (visible) visibleCount++;
+                });
+
+                resultCount.textContent = visibleCount + ' / ' + totalCount + ' dosya gösteriliyor';
+                noResults.classList.toggle('d-none', visibleCount !== 0);
+            }
+
+            searchInput.addEventListener('input', applyFilter);
+            applyFilter();
+        })();
+        </script>
     <?php else: ?>
         <div class="alert alert-info">Henüz tescil dosyası eklenmemiş.</div>
     <?php endif; ?>
